@@ -37,6 +37,13 @@ export default function Sidebar({ sections, activeSection, onSectionClick }: Sid
           <h2 className="text-2xl font-bold text-primary mb-8">Índice</h2>
 
           <nav className="space-y-2">
+            <a
+              href="/contato"
+              className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
+            >
+              📧 Contato & FAQ
+            </a>
+            <div className="border-t border-sidebar-border my-3"></div>
             {sections.map((section) => (
               <div key={section.id}>
                 <button
