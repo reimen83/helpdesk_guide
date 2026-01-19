@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import ConceptCard from '@/components/ConceptCard';
 import DataTable from '@/components/DataTable';
+import DownloadSection from '@/components/DownloadSection';
 import { BookOpen, Server, Network, Zap, Database, CheckCircle } from 'lucide-react';
 
 const sections = [
@@ -64,6 +65,9 @@ export default function Home() {
               Preparação profissional para atendimento e suporte técnico
             </p>
           </div>
+
+          {/* Download Section */}
+          <DownloadSection />
 
           {/* Section 1: Introduction */}
           <section id="intro" className="mb-16 scroll-mt-24">
@@ -384,6 +388,7 @@ export default function Home() {
           <footer className="mt-16 pt-8 border-t border-border text-center text-muted-foreground">
             <p>© 2024 Guia Completo de Help Desk e Suporte Técnico</p>
             <p className="text-sm mt-2">Material educativo para preparação profissional</p>
+            <p className="text-xs mt-4">Desenvolvido com ❤️ para profissionais de TI</p>
           </footer>
         </div>
       </main>
