@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
-import ContactForm from '@/components/ContactForm';
+import ContactFormFormspree from '@/components/ContactFormFormspree';
 import FAQSection from '@/components/FAQSection';
 import NewsletterSection from '@/components/NewsletterSection';
 
@@ -25,7 +25,7 @@ export default function Contact() {
           {/* Formulário */}
           <div className="bg-card border border-border rounded-lg p-8 shadow-md">
             <h2 className="text-2xl font-bold text-primary mb-6">Envie uma Mensagem</h2>
-            <ContactForm />
+            <ContactFormFormspree />
           </div>
 
           {/* Informações de Contato */}
@@ -39,7 +39,7 @@ export default function Contact() {
                   <Mail className="text-primary flex-shrink-0 mt-1" size={24} />
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">contato@guiahelpdesk.com</p>
+                    <p className="text-muted-foreground">reimen83@hotmail.com</p>
                   </div>
                 </div>
 
