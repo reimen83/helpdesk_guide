@@ -43,6 +43,12 @@ export default function Sidebar({ sections, activeSection, onSectionClick }: Sid
             >
               📧 Contato & FAQ
             </a>
+            <a
+              href="/blog"
+              className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
+            >
+              📚 Blog
+            </a>
             <div className="border-t border-sidebar-border my-3"></div>
             {sections.map((section) => (
               <div key={section.id}>
