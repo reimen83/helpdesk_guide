@@ -191,6 +191,16 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-4 md:px-8 py-12">
+        {/* Botão de Retorno */}
+        <div className="mb-8">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-primary hover:text-blue-800 font-semibold px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors border border-blue-200"
+          >
+            ← Voltar para Página Inicial
+          </a>
+        </div>
+
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl font-bold text-primary mb-4">
