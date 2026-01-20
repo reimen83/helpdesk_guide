@@ -3,7 +3,9 @@ import Sidebar from '@/components/Sidebar';
 import ConceptCard from '@/components/ConceptCard';
 import DataTable from '@/components/DataTable';
 import DownloadSection from '@/components/DownloadSection';
+import ProgressBar from '@/components/ProgressBar';
 import { BookOpen, Server, Network, Zap, Database, CheckCircle } from 'lucide-react';
+import { useProgress } from '@/hooks/useProgress';
 
 const sections = [
   {
@@ -39,6 +41,7 @@ const sections = [
 export default function Home() {
   const [activeSection, setActiveSection] = useState('intro');
   const contentRef = useRef<HTMLDivElement>(null);
+  const { markSectionComplete } = useProgress();
 
   useEffect(() => {
     if (activeSection !== 'intro') {
@@ -48,6 +51,10 @@ export default function Home() {
       }
     }
   }, [activeSection]);
+
+  const handleSectionComplete = (sectionId: string) => {
+    markSectionComplete(sectionId);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,6 +81,9 @@ export default function Home() {
 
           {/* Download Section */}
           <DownloadSection />
+
+          {/* Progress Bar */}
+          <ProgressBar />
 
           {/* Section 1: Introduction */}
           <section id="intro" className="mb-16 scroll-mt-24">

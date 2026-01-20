@@ -44,6 +44,12 @@ export default function Sidebar({ sections, activeSection, onSectionClick }: Sid
               📧 Contato & FAQ
             </a>
             <a
+              href="/recursos"
+              className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
+            >
+              🎯 Recursos
+            </a>
+            <a
               href="/blog"
               className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
             >
