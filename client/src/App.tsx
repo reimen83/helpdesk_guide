@@ -8,7 +8,9 @@ import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
+import Quiz from "./pages/Quiz";
 import DarkModeToggle from "./components/DarkModeToggle";
+import SearchCommand from "./components/SearchCommand";
 
 
 function Router() {
@@ -18,6 +20,7 @@ function Router() {
       <Route path={"/recursos"} component={Resources} />
       <Route path={"/contato"} component={Contact} />
       <Route path={"/blog"} component={Blog} />
+      <Route path={"/quiz"} component={Quiz} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -41,6 +44,7 @@ function App() {
           <Toaster />
           <Router />
           <DarkModeToggle />
+          <SearchCommand />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

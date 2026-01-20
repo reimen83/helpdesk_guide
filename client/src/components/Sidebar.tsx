@@ -50,6 +50,12 @@ export default function Sidebar({ sections, activeSection, onSectionClick }: Sid
               🎯 Recursos
             </a>
             <a
+              href="/quiz"
+              className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
+            >
+              ✅ Quiz
+            </a>
+            <a
               href="/blog"
               className="block px-3 py-2 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors text-sm font-medium"
             >

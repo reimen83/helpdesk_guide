@@ -4,6 +4,7 @@ import ConceptCard from '@/components/ConceptCard';
 import DataTable from '@/components/DataTable';
 import DownloadSection from '@/components/DownloadSection';
 import ProgressBar from '@/components/ProgressBar';
+import ExportProgress from '@/components/ExportProgress';
 import { BookOpen, Server, Network, Zap, Database, CheckCircle } from 'lucide-react';
 import { useProgress } from '@/hooks/useProgress';
 
@@ -84,6 +85,9 @@ export default function Home() {
 
           {/* Progress Bar */}
           <ProgressBar />
+
+          {/* Export Progress */}
+          <ExportProgress />
 
           {/* Section 1: Introduction */}
           <section id="intro" className="mb-16 scroll-mt-24">
