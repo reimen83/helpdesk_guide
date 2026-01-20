@@ -24,7 +24,7 @@ export default function CommentsSection({ sectionId, sectionTitle }: CommentsSec
       author: 'João Silva',
       email: 'joao@example.com',
       content: 'Excelente conteúdo! Muito útil para minha preparação para a vaga de Help Desk.',
-      date: '18 de Janeiro de 2024',
+      date: '18 de Janeiro de 2026',
       approved: true,
     },
     {
@@ -32,7 +32,7 @@ export default function CommentsSection({ sectionId, sectionTitle }: CommentsSec
       author: 'Maria Santos',
       email: 'maria@example.com',
       content: 'Gostaria de saber mais sobre certificações. Qual vocês recomendam para começar?',
-      date: '17 de Janeiro de 2024',
+      date: '17 de Janeiro de 2026',
       approved: true,
     },
   ]);

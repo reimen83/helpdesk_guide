@@ -839,7 +839,7 @@ Base de conhecimento com artigos sobre como resolver problemas comuns.
 ```
 Chamado #12345
 Usuário: João Silva
-Data: 15/01/2024 10:30
+Data: 15/01/2026 10:30
 
 Problema: Computador não liga
 
@@ -893,5 +893,5 @@ Desejo muito sucesso na sua carreira em Help Desk!
 ---
 
 **Versão:** 1.0  
-**Data:** Janeiro 2024  
+**Data:** Janeiro 2026  
 **Autor:** Guia Completo de Help Desk e Suporte Técnico

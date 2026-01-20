@@ -15,7 +15,7 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: 'blog-1',
-    title: 'Tendências em Help Desk para 2024: IA e Automação',
+    title: 'Tendências em Help Desk para 2026: IA e Automação',
     excerpt: 'Descubra como inteligência artificial e automação estão transformando o suporte técnico...',
     content: `A inteligência artificial está revolucionando a forma como o Help Desk funciona. Chatbots alimentados por IA podem resolver até 70% dos problemas comuns sem intervenção humana.
 
@@ -27,7 +27,7 @@ Tendências principais:
 
 Profissionais que se adaptarem a essas tecnologias terão grande vantagem competitiva no mercado.`,
     author: 'Equipe Help Desk Guide',
-    date: '19 de Janeiro de 2024',
+    date: '19 de Janeiro de 2026',
     category: 'Tendências',
     readTime: 5,
   },
@@ -46,7 +46,7 @@ Profissionais que se adaptarem a essas tecnologias terão grande vantagem compet
 Tempo médio: 2-3 anos com dedicação.
 Salário esperado: R$ 4.000 - R$ 6.000+`,
     author: 'Equipe Help Desk Guide',
-    date: '18 de Janeiro de 2024',
+    date: '18 de Janeiro de 2026',
     category: 'Carreira',
     readTime: 7,
   },
@@ -64,7 +64,7 @@ Proatividade: Antecipar problemas
 
 Dica: Pratique essas habilidades diariamente. Elas fazem diferença na sua avaliação de desempenho.`,
     author: 'Equipe Help Desk Guide',
-    date: '17 de Janeiro de 2024',
+    date: '17 de Janeiro de 2026',
     category: 'Desenvolvimento',
     readTime: 6,
   },
@@ -91,13 +91,13 @@ Logs:
 
 Dica: Use uma máquina virtual para praticar sem risco.`,
     author: 'Equipe Help Desk Guide',
-    date: '16 de Janeiro de 2024',
+    date: '16 de Janeiro de 2026',
     category: 'Técnico',
     readTime: 8,
   },
   {
     id: 'blog-5',
-    title: 'Certificações que Valem a Pena em 2024',
+    title: 'Certificações que Valem a Pena em 2026',
     excerpt: 'Análise das certificações mais valorizadas no mercado de Help Desk e TI...',
     content: `Nem todas as certificações têm o mesmo valor. Aqui estão as mais importantes:
 
@@ -118,7 +118,7 @@ Microsoft Certified (⭐⭐⭐⭐)
 
 Investimento: CompTIA A+ é o melhor ponto de partida.`,
     author: 'Equipe Help Desk Guide',
-    date: '15 de Janeiro de 2024',
+    date: '15 de Janeiro de 2026',
     category: 'Certificações',
     readTime: 6,
   },

@@ -58,15 +58,17 @@ export default function DownloadSection() {
             </p>
 
             <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
-              <span>📄 ~15 páginas</span>
+              <span>📄 ~20 páginas</span>
               <span>•</span>
               <span>⚡ Rápido de consultar</span>
             </div>
 
-            <Button className="w-full bg-accent hover:bg-green-700 text-white gap-2" disabled>
-              <Download size={18} />
-              Em Breve
-            </Button>
+            <a href="/guia_rapido_referencias.pdf" download>
+              <Button className="w-full bg-accent hover:bg-green-700 text-white gap-2">
+                <Download size={18} />
+                Baixar Guia Rápido (PDF)
+              </Button>
+            </a>
           </div>
         </div>
 

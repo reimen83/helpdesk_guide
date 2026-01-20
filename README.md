@@ -276,6 +276,6 @@ MIT - Sinta-se livre para usar este projeto como referência para aprender.
 
 **Desenvolvido com ❤️ para profissionais de TI**
 
-**Última atualização:** Janeiro de 2024
+**Última atualização:** Janeiro de 2026
 
 **Versão:** 1.0.0
