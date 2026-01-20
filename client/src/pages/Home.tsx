@@ -41,11 +41,17 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const element = document.getElementById(activeSection);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (activeSection !== 'intro') {
+      const element = document.getElementById(activeSection);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }, [activeSection]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-background">

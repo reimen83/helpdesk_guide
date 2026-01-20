@@ -139,13 +139,22 @@ export default function Blog() {
     return (
       <div className="min-h-screen bg-background">
         <main className="max-w-4xl mx-auto px-4 md:px-8 py-12">
-          {/* Botão Voltar */}
-          <button
-            onClick={() => setSelectedPost(null)}
-            className="mb-8 text-primary hover:text-blue-800 font-semibold flex items-center gap-2"
-          >
-            ← Voltar para Blog
-          </button>
+          {/* Botões de Navegação */}
+          <div className="mb-8 flex gap-4 items-center flex-wrap">
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="text-primary hover:text-blue-800 font-semibold flex items-center gap-2"
+            >
+              ← Voltar para Blog
+            </button>
+            <span className="text-muted-foreground">|</span>
+            <a
+              href="/"
+              className="text-primary hover:text-blue-800 font-semibold flex items-center gap-2"
+            >
+              🏠 Página Inicial
+            </a>
+          </div>
 
           {/* Artigo */}
           <article className="bg-card border border-border rounded-lg p-8 shadow-md">
