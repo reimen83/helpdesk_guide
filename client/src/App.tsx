@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import Quiz from "./pages/Quiz";
 import DarkModeToggle from "./components/DarkModeToggle";
 import SearchCommand from "./components/SearchCommand";
+import Footer from "./components/Footer";
 
 
 function Router() {
@@ -42,7 +43,12 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <div className="flex flex-col min-h-screen">
+            <div className="flex-1">
+              <Router />
+            </div>
+            <Footer />
+          </div>
           <DarkModeToggle />
           <SearchCommand />
         </TooltipProvider>

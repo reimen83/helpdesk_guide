@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
+import { Home, Search, ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
+import { Link } from "wouter";
 
 export default function NotFound() {
   const [, setLocation] = useLocation();
@@ -11,39 +11,100 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
+    <div className="min-h-screen w-full bg-background flex flex-col">
+      {/* Breadcrumb */}
+      <nav className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-3">
+        <div className="container">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Link href="/">
+              <a className="text-primary hover:underline transition-colors">Home</a>
+            </Link>
+            <span>›</span>
+            <span className="text-foreground font-semibold">Página não encontrada</span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-2xl">
+          {/* 404 Animation */}
+          <div className="text-center mb-8">
+            <div className="inline-block mb-6">
+              <div className="text-9xl font-bold text-primary opacity-20 mb-2">404</div>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-blue-400 mx-auto rounded-full" />
             </div>
+
+            <h1 className="text-5xl font-bold text-foreground mb-4">
+              Página não encontrada
+            </h1>
+
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-md mx-auto">
+              Desculpe, a página que você está procurando não existe ou foi movida. 
+              Mas não se preocupe, você pode voltar ao guia de estudos!
+            </p>
           </div>
 
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
+          {/* Suggestions */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
+            <h2 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Search size={20} className="text-primary" />
+              Sugestões de navegação:
+            </h2>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/">
+                  <a className="text-primary hover:underline">← Voltar para Página Inicial</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/quiz">
+                  <a className="text-primary hover:underline">→ Ir para Quiz</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog">
+                  <a className="text-primary hover:underline">→ Ir para Blog</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/recursos">
+                  <a className="text-primary hover:underline">→ Ir para Recursos</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contato">
+                  <a className="text-primary hover:underline">→ Ir para Contato</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
-
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+              className="bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
+              <Home size={20} />
+              Página Inicial
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => window.history.back()}
+              className="px-8 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <ArrowLeft size={20} />
+              Voltar
             </Button>
           </div>
-        </CardContent>
-      </Card>
+
+          {/* Help Text */}
+          <div className="text-center mt-12 text-sm text-muted-foreground">
+            <p>Ainda precisa de ajuda? <Link href="/contato"><a className="text-primary hover:underline">Entre em contato</a></Link></p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle, XCircle, Award, RotateCcw, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface Question {
   id: number;
@@ -280,6 +281,12 @@ Parabéns pela dedicação!
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Quiz', href: '/quiz' },
+      ]} />
+
       {/* Botão de Retorno */}
       <div className="bg-blue-50 border-b border-blue-200 py-4">
         <div className="container max-w-2xl">

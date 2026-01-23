@@ -1,6 +1,7 @@
 import { ExternalLink, Download, Globe, BookOpen, Award, Zap, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface Resource {
   title: string;
@@ -142,6 +143,12 @@ const categories = [
 export default function Resources() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Recursos', href: '/recursos' },
+      ]} />
+
       {/* Botão de Retorno */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4">
         <div className="container">

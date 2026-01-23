@@ -5,10 +5,17 @@ import NewsletterSection from '@/components/NewsletterSection';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Contact() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Contato', href: '/contato' },
+      ]} />
+
       {/* Botão de Retorno */}
       <div className="bg-blue-50 border-b border-blue-200 py-4">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
