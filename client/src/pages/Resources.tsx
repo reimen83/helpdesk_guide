@@ -1,6 +1,5 @@
-import { ExternalLink, Download, Globe, BookOpen, Award, Zap, ArrowLeft } from 'lucide-react';
+import { ExternalLink, Download, Globe, BookOpen, Award, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'wouter';
 import Breadcrumb from '@/components/Breadcrumb';
 
 interface Resource {
@@ -149,20 +148,8 @@ export default function Resources() {
         { label: 'Recursos', href: '/recursos' },
       ]} />
 
-      {/* Botão de Retorno */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4">
-        <div className="container">
-          <Link href="/">
-            <Button className="bg-blue-500 hover:bg-blue-400 text-white gap-2 flex items-center">
-              <ArrowLeft size={20} />
-              Voltar para Página Inicial
-            </Button>
-          </Link>
-        </div>
-      </div>
-
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8">
         <div className="container">
           <h1 className="text-4xl font-bold mb-4">Recursos Gratuitos</h1>
           <p className="text-lg text-blue-100">

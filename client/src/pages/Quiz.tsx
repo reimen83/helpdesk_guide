@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle, XCircle, Award, RotateCcw, ArrowLeft } from 'lucide-react';
+import { CheckCircle, XCircle, Award, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -267,9 +267,9 @@ Parabéns pela dedicação!
               <RotateCcw size={20} />
               Tentar Novamente
             </Button>
-            <a href="/">
+            <Link href="/">
               <Button variant="outline">Voltar ao Guia</Button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -287,19 +287,7 @@ Parabéns pela dedicação!
         { label: 'Quiz', href: '/quiz' },
       ]} />
 
-      {/* Botão de Retorno */}
-      <div className="bg-blue-50 border-b border-blue-200 py-4">
-        <div className="container max-w-2xl">
-          <Link href="/">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2 flex items-center">
-              <ArrowLeft size={20} />
-              Voltar para Página Inicial
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="container max-w-2xl py-12">
+      <div className="container max-w-2xl py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">

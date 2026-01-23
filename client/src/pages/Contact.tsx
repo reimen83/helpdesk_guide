@@ -2,9 +2,6 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import ContactFormFormspree from '@/components/ContactFormFormspree';
 import FAQSection from '@/components/FAQSection';
 import NewsletterSection from '@/components/NewsletterSection';
-import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'wouter';
 import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Contact() {
@@ -16,19 +13,7 @@ export default function Contact() {
         { label: 'Contato', href: '/contato' },
       ]} />
 
-      {/* Botão de Retorno */}
-      <div className="bg-blue-50 border-b border-blue-200 py-4">
-        <div className="max-w-4xl mx-auto px-4 md:px-8">
-          <Link href="/">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2 flex items-center">
-              <ArrowLeft size={20} />
-              Voltar para Página Inicial
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <main className="max-w-4xl mx-auto px-4 md:px-8 py-12">
+      <main className="max-w-4xl mx-auto px-4 md:px-8 py-8">
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl font-bold text-primary mb-4">
