@@ -226,7 +226,7 @@ helpdesk-guide/
 
 ## 🌐 Acesso Online
 
-- **Site Oficial:** https://helpdesk-guide.com.br
+- **Site Oficial:** https://helpdeskguide.com.br
 - **GitHub:** https://github.com/reimen83/helpdesk-guide
 - **LinkedIn:** https://linkedin.com/in/reinaldohneto
 
