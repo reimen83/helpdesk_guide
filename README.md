@@ -280,7 +280,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 👨‍💻 Autor
 
-**Reinaldo Henrique Neto**
+**Reinaldo Honorio Neto**
 - GitHub: [@reimen83](https://github.com/reimen83)
 - LinkedIn: [reinaldohneto](https://linkedin.com/in/reinaldohneto)
 - Email: reimentutors@gmail.com
@@ -336,6 +336,6 @@ Se este projeto foi útil para você:
 
 ---
 
-**Desenvolvido com ❤️ para a comunidade de TI brasileira**
+**Desenvolvido com muito carinho para toda a comunidade de TI**
 
 *Última atualização: Janeiro 2026*
