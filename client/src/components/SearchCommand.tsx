@@ -110,88 +110,99 @@ export default function SearchCommand() {
     }
   };
 
-  if (!isOpen) {
-    return (
+  return (
+    <>
+      {/* Search Button - Integrated in Navbar */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed top-4 right-4 z-30 flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm text-gray-600 dark:text-gray-400"
+        className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 border border-border rounded-lg transition-colors text-sm text-muted-foreground hover:text-foreground"
         title="Pressione Ctrl+K para buscar"
       >
         <Search size={16} />
-        <span className="hidden sm:inline">Buscar...</span>
-        <span className="hidden sm:inline text-xs text-gray-400">Ctrl+K</span>
+        <span>Buscar...</span>
+        <span className="text-xs text-muted-foreground/60 ml-auto">⌘K</span>
       </button>
-    );
-  }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20">
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-black bg-opacity-50"
-        onClick={() => setIsOpen(false)}
-      />
+      {/* Mobile Search Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+        title="Buscar"
+      >
+        <Search size={20} className="text-foreground" />
+      </button>
 
-      {/* Search Box */}
-      <div className="relative w-full max-w-2xl mx-4 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700">
-        {/* Input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-          <Search size={20} className="text-gray-400" />
-          <input
-            autoFocus
-            type="text"
-            placeholder="Buscar seções, páginas, conceitos..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-foreground placeholder-gray-400"
-          />
-          <button
+      {/* Search Modal */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 md:pt-32 px-4">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
-            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-          >
-            <X size={20} className="text-gray-400" />
-          </button>
-        </div>
+          />
 
-        {/* Results */}
-        <div className="max-h-96 overflow-y-auto">
-          {results.length === 0 ? (
-            <div className="px-4 py-8 text-center text-gray-500">
-              Nenhum resultado encontrado para "{search}"
+          {/* Search Box */}
+          <div className="relative w-full max-w-2xl bg-background rounded-xl shadow-2xl border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            {/* Input */}
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-muted/30">
+              <Search size={20} className="text-muted-foreground" />
+              <input
+                autoFocus
+                type="text"
+                placeholder="Buscar seções, páginas, conceitos..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                className="flex-1 bg-transparent outline-none text-foreground placeholder-muted-foreground text-sm"
+              />
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-1 hover:bg-muted rounded transition-colors"
+              >
+                <X size={18} className="text-muted-foreground" />
+              </button>
             </div>
-          ) : (
-            <ul>
-              {results.map((result, index) => (
-                <li key={result.id}>
-                  <button
-                    onClick={() => handleSelect(result)}
-                    className={`w-full px-4 py-3 text-left border-b border-gray-100 dark:border-gray-800 transition-colors ${
-                      index === selectedIndex
-                        ? 'bg-blue-50 dark:bg-blue-900'
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="font-semibold text-foreground">{result.title}</div>
-                        <div className="text-sm text-muted-foreground">{result.description}</div>
-                      </div>
-                      <span className="ml-2 px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-400 rounded">
-                        {result.category}
-                      </span>
-                    </div>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
 
-        {/* Footer */}
-        <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 flex justify-between">
-          <span>↑↓ Navegar • ↵ Selecionar • ESC Fechar</span>
+            {/* Results */}
+            <div className="max-h-96 overflow-y-auto">
+              {results.length === 0 ? (
+                <div className="px-4 py-12 text-center text-muted-foreground text-sm">
+                  Nenhum resultado encontrado para "{search}"
+                </div>
+              ) : (
+                <ul className="divide-y divide-border">
+                  {results.map((result, index) => (
+                    <li key={result.id}>
+                      <button
+                        onClick={() => handleSelect(result)}
+                        className={`w-full px-4 py-3 text-left transition-colors text-sm ${
+                          index === selectedIndex
+                            ? 'bg-primary/10 text-foreground'
+                            : 'hover:bg-muted'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-foreground">{result.title}</div>
+                            <div className="text-xs text-muted-foreground truncate">{result.description}</div>
+                          </div>
+                          <span className="ml-2 px-2 py-1 bg-muted text-xs text-muted-foreground rounded whitespace-nowrap flex-shrink-0">
+                            {result.category}
+                          </span>
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-4 py-2 border-t border-border bg-muted/20 text-xs text-muted-foreground flex justify-between">
+              <span>↑↓ Navegar • ↵ Selecionar • ESC Fechar</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

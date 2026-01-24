@@ -29,11 +29,6 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
@@ -43,14 +38,34 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          
+          {/* Modern Navbar */}
+          <nav className="sticky top-0 z-40 bg-background/95 dark:bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-200">
+            <div className="container flex items-center justify-between h-16 gap-4">
+              {/* Logo */}
+              <a href="/" className="flex items-center gap-2 font-bold text-lg text-primary hover:text-blue-700 transition-colors flex-shrink-0">
+                <span className="text-xl">📚</span>
+                <span className="hidden sm:inline">Help Desk</span>
+              </a>
+              
+              {/* Center - Search */}
+              <div className="flex-1 max-w-md">
+                <SearchCommand />
+              </div>
+              
+              {/* Right - Theme Toggle */}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <DarkModeToggle />
+              </div>
+            </div>
+          </nav>
+          
           <div className="flex flex-col min-h-screen">
             <div className="flex-1">
               <Router />
             </div>
             <Footer />
           </div>
-          <DarkModeToggle />
-          <SearchCommand />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

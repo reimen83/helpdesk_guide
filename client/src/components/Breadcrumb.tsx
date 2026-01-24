@@ -12,17 +12,17 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-3">
+    <nav className="sticky top-0 z-30 bg-background/80 dark:bg-background/80 backdrop-blur-sm border-b border-border/50 py-2.5 transition-all duration-200">
       <div className="container">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
           {items.map((item, index) => (
-            <div key={index} className="flex items-center gap-2">
-              {index > 0 && <ChevronRight size={16} className="text-gray-400" />}
+            <div key={index} className="flex items-center gap-1.5">
+              {index > 0 && <ChevronRight size={14} className="text-border opacity-60" />}
               {index === items.length - 1 ? (
-                <span className="text-foreground font-semibold">{item.label}</span>
+                <span className="text-foreground font-medium truncate">{item.label}</span>
               ) : (
                 <Link href={item.href}>
-                  <a className="text-primary hover:underline transition-colors">
+                  <a className="text-primary hover:text-blue-700 dark:hover:text-blue-400 transition-colors truncate hover:underline">
                     {item.label}
                   </a>
                 </Link>
