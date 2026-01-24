@@ -46,7 +46,7 @@ export default function Contact() {
                   <Mail className="text-primary flex-shrink-0 mt-1" size={24} />
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">reimen83@hotmail.com</p>
+                    <p className="text-muted-foreground">reimentutors@gmail.com</p>
                   </div>
                 </div>
 

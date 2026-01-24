@@ -1,8 +1,8 @@
-# Setup Formspree - Guia Passo a Passo para reimen83@hotmail.com
+# Setup Formspree - Guia Passo a Passo para reimentutors@gmail.com
 
 ## 📋 Informações do Usuário
 
-- **Email para receber contatos:** reimen83@hotmail.com
+- **Email para receber contatos:** reimentutors@gmail.com
 - **Site:** Help Desk Guide
 - **Página de contato:** /contato
 
@@ -26,7 +26,7 @@
 1. Após fazer login, clique em **"New Form"**
 2. Preencha:
    - **Form Name:** Help Desk Guide Contact
-   - **Email:** reimen83@hotmail.com
+   - **Email:** reimentutors@gmail.com
 3. Clique em **"Create"**
 
 ---
@@ -111,7 +111,7 @@ Depois faça um checkpoint para salvar as mudanças.
    - Email: Qualquer email
    - Mensagem: Teste
 3. Clique em **"Enviar Mensagem"**
-4. Você deve receber um email em **reimen83@hotmail.com** em poucos segundos
+4. Você deve receber um email em **reimentutors@gmail.com** em poucos segundos
 
 ---
 
@@ -121,7 +121,7 @@ Quando alguém enviar uma mensagem, você receberá um email assim:
 
 ```
 De: noreply@formspree.io
-Para: reimen83@hotmail.com
+Para: reimentutors@gmail.com
 Assunto: New submission from Help Desk Guide Contact
 
 Nome: João Silva

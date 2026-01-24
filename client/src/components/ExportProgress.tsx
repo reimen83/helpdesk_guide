@@ -92,7 +92,7 @@ Para profissionais de Help Desk:
 
 CONTATO E SUPORTE
 ────────────────────────────────────────────────────────────────
-Email: reimen83@hotmail.com
+Email: reimentutors@gmail.com
 Dúvidas? Acesse a página de Contato no site.
 
 ════════════════════════════════════════════════════════════════

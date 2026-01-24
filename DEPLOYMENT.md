@@ -151,7 +151,7 @@ Seu site está protegido com:
 
 - **Dúvidas sobre Manus:** https://help.manus.im
 - **Problemas técnicos:** Email suporte
-- **Feedback:** reimen83@hotmail.com
+- **Feedback:** reimentutors@gmail.com
 
 ---
 

@@ -152,7 +152,7 @@ Documentação completa de todas as funcionalidades implementadas no site.
 - **Funcionalidades:**
   - Formulário de contato com validação
   - Integração com Formspree
-  - Emails enviados para: reimen83@hotmail.com
+  - Emails enviados para: reimentutors@gmail.com
   - FAQ interativa (10 perguntas)
   - Newsletter com Mailchimp
 
@@ -292,7 +292,7 @@ Documentação completa de todas as funcionalidades implementadas no site.
 ## 📞 Suporte
 
 Para dúvidas sobre as funcionalidades:
-- Email: reimen83@hotmail.com
+- Email: reimentutors@gmail.com
 - GitHub: https://github.com/reimen83/helpdesk-guide
 - Manus Help: https://help.manus.im
 

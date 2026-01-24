@@ -225,7 +225,7 @@ Seu repositório estará visível em:
 
 Se tiver dúvidas:
 - Acesse: https://help.manus.im
-- Email: reimen83@hotmail.com
+- Email: reimentutors@gmail.com
 - GitHub Issues: https://github.com/reimen83/helpdesk-guide/issues
 
 ---

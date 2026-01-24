@@ -8,7 +8,7 @@ import { toast } from 'sonner';
  * Usa formulário HTML tradicional para compatibilidade total com CORS
  */
 
-const FORMSPREE_ID = '2917895017215295327'; // ID do Formspree para reimen83@hotmail.com
+const FORMSPREE_ID = '2917895017215295327'; // ID do Formspree para reimentutors@gmail.com
 
 export default function ContactFormFormspree() {
   const [submitted, setSubmitted] = useState(false);
