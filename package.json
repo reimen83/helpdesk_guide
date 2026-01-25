@@ -6,9 +6,11 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+ {
   "engines": {
-    "node": ">=20"
-  },
+    "node": "24.x"
+  }
+},
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
