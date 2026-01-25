@@ -1,14 +1,4 @@
 {
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
   "framework": "vite",
-  "outputDirectory": "dist",
-    "regions": ["sfo1"],
-  "functions": {
-    "api/**/*.ts": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  }
+  "outputDirectory": "dist"
 }
