@@ -2,3 +2,8 @@
   "framework": "vite",
   "outputDirectory": "dist"
 }
+{
+  "installCommand": "corepack enable && pnpm install",
+  "framework": "vite",
+  "outputDirectory": "dist"
+}
