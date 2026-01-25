@@ -3,7 +3,7 @@
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
   "framework": "vite",
-  "outputDirectory": "dist/public",
+  "outputDirectory": "dist",
   "env": {
     "VITE_ANALYTICS_ENDPOINT": "@vite_analytics_endpoint",
     "VITE_ANALYTICS_WEBSITE_ID": "@vite_analytics_website_id",
