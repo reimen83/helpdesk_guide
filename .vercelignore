@@ -1,0 +1,58 @@
+# Documentação
+README.md
+DEPLOYMENT.md
+GITHUB_SETUP.md
+FEATURES.md
+IMPLEMENTACAO_RAPIDA.md
+INTEGRACAO_FORMSPREE_MAILCHIMP.md
+ESTRATEGIA_DIVULGACAO.md
+SETUP_FORMSPREE_USUARIO.md
+GUIA_GOOGLE_SEARCH_CONSOLE.md
+ideas.md
+
+# Arquivos de configuração
+.git
+.gitignore
+.env.local
+.env.*.local
+
+# Dependências
+node_modules
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Artefatos de build
+dist
+build
+.next
+out
+
+# Testes
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+coverage
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos temporários
+tmp
+temp
+*.tmp
