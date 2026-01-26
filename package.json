@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "name": "helpdesk_guide",
   "type": "module",
   "scripts": {
@@ -91,4 +92,12 @@
       "tailwindcss>nanoid": "3.3.7"
     }
   }
+=======
+  "name": "helpdesk-guide",
+  "version": "1.0.0",
+  "description": "Guia Completo de Help Desk e Suporte Técnico",
+  "author": "Reinaldo Neto",
+  "license": "MIT",
+  "private": true
+>>>>>>> Stashed changes
 }
