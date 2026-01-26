@@ -39,9 +39,14 @@
         <span>Help Desk</span>
       </div>
       
-      <div class="navbar-search">
-        <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
-        <span class="search-hint">⌘K</span>
+      <!-- Tabs Navigation (Desktop) -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="home">Home</button>
+        <button class="tab-btn" data-tab="conteudo">Conteúdo</button>
+        <button class="tab-btn" data-tab="recursos">Recursos</button>
+        <button class="tab-btn" data-tab="quiz">Quiz</button>
+        <button class="tab-btn" data-tab="blog">Blog</button>
+        <button class="tab-btn" data-tab="contato">Contato</button>
       </div>
       
       <div class="navbar-actions">
@@ -71,410 +76,328 @@
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <h3>Navegação</h3>
-      <button class="close-btn" id="closeSidebar">✕</button>
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h3>Menu</h3>
+      <button class="drawer-close" id="drawerClose">✕</button>
     </div>
-    
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <h4>Seções</h4>
-        <ul class="nav-list">
-          <li><a href="#intro" class="nav-link" data-section="intro">1. Introdução</a></li>
-          <li><a href="#atendimento" class="nav-link" data-section="atendimento">2. Gestão de Atendimento</a></li>
-          <li><a href="#hardware" class="nav-link" data-section="hardware">3. Hardware e Periféricos</a></li>
-          <li><a href="#servidores" class="nav-link" data-section="servidores">4. Servidores e Redes</a></li>
-          <li><a href="#sistemas-senior" class="nav-link" data-section="sistemas-senior">5. Sistemas Senior</a></li>
-          <li><a href="#backup" class="nav-link" data-section="backup">6. Backup e Projetos</a></li>
-          <li><a href="#conclusao" class="nav-link" data-section="conclusao">7. Conclusão</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <h4>Recursos</h4>
-        <ul class="nav-list">
-          <li><a href="#recursos" class="nav-link">Recursos Gratuitos</a></li>
-          <li><a href="#quiz" class="nav-link">Quiz Interativo</a></li>
-          <li><a href="#blog" class="nav-link">Blog</a></li>
-          <li><a href="#contato" class="nav-link">Contato & FAQ</a></li>
-        </ul>
-      </div>
+    <nav class="drawer-nav">
+      <button class="drawer-tab" data-tab="home">Home</button>
+      <button class="drawer-tab" data-tab="conteudo">Conteúdo</button>
+      <button class="drawer-tab" data-tab="recursos">Recursos</button>
+      <button class="drawer-tab" data-tab="quiz">Quiz</button>
+      <button class="drawer-tab" data-tab="blog">Blog</button>
+      <button class="drawer-tab" data-tab="contato">Contato</button>
     </nav>
-  </aside>
-
-  <!-- Breadcrumb -->
-  <div class="breadcrumb-container">
-    <div class="breadcrumb">
-      <a href="#home" class="breadcrumb-link">Home</a>
-      <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-current" id="breadcrumbCurrent">Introdução</span>
-    </div>
   </div>
 
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
-      <!-- Header -->
-      <div class="header">
-        <div class="header-icon">📖</div>
-        <h1 class="header-title">Guia Completo de Help Desk</h1>
-        <p class="header-subtitle">Preparação profissional para atendimento e suporte técnico</p>
+      
+      <!-- HOME TAB -->
+      <div class="tab-content active" id="home-tab">
+        <div class="header">
+          <div class="header-icon">📖</div>
+          <h1 class="header-title">Guia Completo de Help Desk</h1>
+          <p class="header-subtitle">Preparação profissional para atendimento e suporte técnico</p>
+        </div>
+
+        <section class="download-section">
+          <h2>📚 Materiais de Estudo</h2>
+          <p>Baixe nossos materiais completos em PDF para estudar offline e se preparar para a vaga de Help Desk.</p>
+          
+          <div class="download-grid">
+            <div class="download-card">
+              <div class="card-icon">📄</div>
+              <h3>Mini Curso Completo</h3>
+              <p>PDF com 8 módulos detalhados</p>
+              <p class="card-meta">~50 páginas • Nível: Iniciante a Intermediário</p>
+              <button class="btn btn-primary" onclick="downloadPDF('mini-curso')">Baixar PDF</button>
+            </div>
+            
+            <div class="download-card">
+              <div class="card-icon">📋</div>
+              <h3>Guia Rápido de Referências</h3>
+              <p>Resumo executivo</p>
+              <p class="card-meta">~20 páginas • ⚡ Rápido de consultar</p>
+              <button class="btn btn-success" onclick="downloadPDF('guia-rapido')">Baixar PDF</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="progress-section">
+          <div class="progress-header">
+            <h3>Seu Progresso</h3>
+            <span class="progress-percentage" id="progressPercentage">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="progress-text" id="progressText">Comece a estudar para acompanhar seu progresso!</p>
+        </section>
       </div>
 
-      <!-- Download Section -->
-      <section class="download-section">
-        <h2>📚 Materiais de Estudo</h2>
-        <p>Baixe nossos materiais completos em PDF para estudar offline e se preparar para a vaga de Help Desk.</p>
+      <!-- CONTEÚDO TAB -->
+      <div class="tab-content" id="conteudo-tab">
+        <h1>Conteúdo Completo</h1>
         
-        <div class="download-grid">
-          <div class="download-card">
-            <div class="card-icon">📄</div>
-            <h3>Mini Curso Completo</h3>
-            <p>PDF com 8 módulos detalhados</p>
-            <p class="card-meta">~50 páginas • Nível: Iniciante a Intermediário</p>
-            <button class="btn btn-primary" onclick="downloadPDF('mini-curso')">Baixar PDF</button>
-          </div>
+        <section id="intro" class="content-section">
+          <h2>1. Introdução</h2>
+          <p>Este guia foi desenvolvido para fornecer o embasamento teórico e prático necessário para profissionais que desejam atuar na área de suporte técnico (Help Desk/Service Desk). O conteúdo abrange desde o atendimento ao cliente até a administração de infraestruturas complexas, alinhado às exigências do mercado atual.</p>
+          <p>O suporte técnico moderno não se resume a consertar máquinas; trata-se de gerenciar serviços e entregar valor ao negócio. Ao longo deste material, você compreenderá os conceitos fundamentais que diferenciavam um profissional de suporte excelente.</p>
           
-          <div class="download-card">
-            <div class="card-icon">📋</div>
-            <h3>Guia Rápido de Referências</h3>
-            <p>Resumo executivo</p>
-            <p class="card-meta">~20 páginas • ⚡ Rápido de consultar</p>
-            <button class="btn btn-success" onclick="downloadPDF('guia-rapido')">Baixar PDF</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Progress Bar -->
-      <section class="progress-section">
-        <div class="progress-header">
-          <h3>Seu Progresso</h3>
-          <span class="progress-percentage" id="progressPercentage">0%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p class="progress-text" id="progressText">Comece a estudar para acompanhar seu progresso!</p>
-      </section>
-
-      <!-- Sections Content -->
-      <section id="intro" class="content-section">
-        <h2>1. Introdução</h2>
-        <p>Este guia foi desenvolvido para fornecer o embasamento teórico e prático necessário para profissionais que desejam atuar na área de suporte técnico (Help Desk/Service Desk). O conteúdo abrange desde o atendimento ao cliente até a administração de infraestruturas complexas, alinhado às exigências do mercado atual.</p>
-        <p>O suporte técnico moderno não se resume a consertar máquinas; trata-se de gerenciar serviços e entregar valor ao negócio. Ao longo deste material, você compreenderá os conceitos fundamentais que diferenciavam um profissional de suporte excelente.</p>
-        
-        <h3>O que você aprenderá:</h3>
-        <ul class="concept-list">
-          <li><strong>Fundamentos ITIL 4:</strong> Ciclo de vida dos serviços, gestão de incidentes e mudanças</li>
-          <li><strong>Atendimento ao Cliente:</strong> Técnicas de comunicação, empatia e resolução de problemas</li>
-          <li><strong>Troubleshooting:</strong> Metodologia sistemática para diagnóstico e resolução</li>
-          <li><strong>Infraestrutura:</strong> Hardware, servidores, redes e sistemas operacionais</li>
-          <li><strong>Ferramentas Profissionais:</strong> Softwares essenciais para Help Desk moderno</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('intro')">Marcar como Concluído</button>
-      </section>
-
-      <section id="atendimento" class="content-section">
-        <h2>2. Gestão de Atendimento</h2>
-        <p>A gestão de atendimento é o coração do Help Desk. Envolve receber, registrar, priorizar e resolver chamados de forma eficiente.</p>
-        
-        <h3>Ciclo de Vida de um Chamado:</h3>
-        <ol class="concept-list">
-          <li><strong>Abertura:</strong> Usuário relata o problema via telefone, email ou sistema</li>
-          <li><strong>Registro:</strong> Informações documentadas no sistema de tickets</li>
-          <li><strong>Triagem:</strong> Classificação por prioridade e categoria</li>
-          <li><strong>Atendimento:</strong> Técnico trabalha na resolução</li>
-          <li><strong>Resolução:</strong> Problema solucionado e testado</li>
-          <li><strong>Encerramento:</strong> Feedback do usuário e documentação final</li>
-        </ol>
-        
-        <h3>Conceitos ITIL Essenciais:</h3>
-        <ul class="concept-list">
-          <li><strong>SLA (Service Level Agreement):</strong> Tempo máximo para resolver diferentes tipos de problemas</li>
-          <li><strong>Prioridade vs Urgência:</strong> Como classificar corretamente os chamados</li>
-          <li><strong>Escalação:</strong> Quando e como encaminhar para níveis superiores</li>
-          <li><strong>Conhecimento Base:</strong> Documentar soluções para reutilização</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('atendimento')">Marcar como Concluído</button>
-      </section>
-
-      <section id="hardware" class="content-section">
-        <h2>3. Hardware e Periféricos</h2>
-        <p>Conhecimento de hardware é fundamental para diagnosticar e resolver problemas físicos nos computadores.</p>
-        
-        <h3>Componentes Principais:</h3>
-        <div class="component-grid">
-          <div class="component-card">
-            <h4>Processador (CPU)</h4>
-            <p>Responsável pelo processamento de dados. Marcas principais: Intel e AMD.</p>
-          </div>
-          <div class="component-card">
-            <h4>Memória RAM</h4>
-            <p>Memória volátil para execução de programas. Tipos: DDR3, DDR4, DDR5.</p>
-          </div>
-          <div class="component-card">
-            <h4>Disco Rígido / SSD</h4>
-            <p>Armazenamento permanente. SSDs são mais rápidos e confiáveis.</p>
-          </div>
-          <div class="component-card">
-            <h4>Placa Mãe</h4>
-            <p>Conecta todos os componentes. Diferentes soquetes para diferentes CPUs.</p>
-          </div>
-          <div class="component-card">
-            <h4>Fonte de Alimentação</h4>
-            <p>Fornece energia. Importante verificar potência e estabilidade.</p>
-          </div>
-          <div class="component-card">
-            <h4>Periféricos</h4>
-            <p>Mouse, teclado, monitor, impressora, scanner, etc.</p>
-          </div>
-        </div>
-        
-        <h3>Troubleshooting de Hardware:</h3>
-        <ul class="concept-list">
-          <li>Computador não liga → Verificar fonte, cabos, bateria</li>
-          <li>Lentidão → Verificar RAM, disco cheio, processos em background</li>
-          <li>Superaquecimento → Limpar ventiladores, verificar pasta térmica</li>
-          <li>Periféricos não funcionam → Drivers desatualizados ou com defeito</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('hardware')">Marcar como Concluído</button>
-      </section>
-
-      <section id="servidores" class="content-section">
-        <h2>4. Servidores e Redes</h2>
-        <p>Entender infraestrutura de servidores e redes é essencial para suporte técnico em ambientes corporativos.</p>
-        
-        <h3>Tipos de Servidores:</h3>
-        <ul class="concept-list">
-          <li><strong>Servidor Web:</strong> Hospeda sites e aplicações web (Apache, Nginx, IIS)</li>
-          <li><strong>Servidor de Banco de Dados:</strong> Armazena e gerencia dados (MySQL, SQL Server, PostgreSQL)</li>
-          <li><strong>Servidor de Arquivos:</strong> Compartilha arquivos na rede (NAS, SMB/CIFS)</li>
-          <li><strong>Servidor de Email:</strong> Gerencia comunicação por email (Exchange, Postfix)</li>
-          <li><strong>Servidor de Autenticação:</strong> Controla acesso (Active Directory, LDAP)</li>
-        </ul>
-        
-        <h3>Conceitos de Rede:</h3>
-        <ul class="concept-list">
-          <li><strong>IP (Internet Protocol):</strong> Endereço único para cada dispositivo</li>
-          <li><strong>DNS (Domain Name System):</strong> Converte nomes em endereços IP</li>
-          <li><strong>DHCP:</strong> Atribui IPs automaticamente</li>
-          <li><strong>Firewall:</strong> Controla tráfego de rede</li>
-          <li><strong>VPN:</strong> Conexão segura remota</li>
-          <li><strong>Roteador:</strong> Conecta diferentes redes</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('servidores')">Marcar como Concluído</button>
-      </section>
-
-      <section id="sistemas-senior" class="content-section">
-        <h2>5. Sistemas Senior</h2>
-        <p>Sistema Senior é um ERP amplamente utilizado em empresas brasileiras. Conhecimento básico é importante para suporte técnico.</p>
-        
-        <h3>Módulos Principais:</h3>
-        <ul class="concept-list">
-          <li><strong>Financeiro:</strong> Contas a pagar/receber, fluxo de caixa</li>
-          <li><strong>Estoque:</strong> Controle de inventário e movimentação</li>
-          <li><strong>Vendas:</strong> Pedidos, cotações, faturamento</li>
-          <li><strong>Compras:</strong> Requisições, pedidos, recebimento</li>
-          <li><strong>Recursos Humanos:</strong> Folha de pagamento, benefícios</li>
-          <li><strong>Produção:</strong> Planejamento e controle de produção</li>
-        </ul>
-        
-        <h3>Problemas Comuns e Soluções:</h3>
-        <ul class="concept-list">
-          <li>Lentidão do sistema → Verificar banco de dados, índices, conexão</li>
-          <li>Erro ao gerar relatório → Validar filtros, permissões, dados</li>
-          <li>Problema de sincronização → Verificar backup, replicação de dados</li>
-          <li>Usuário sem acesso → Revisar permissões, grupos de segurança</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('sistemas-senior')">Marcar como Concluído</button>
-      </section>
-
-      <section id="backup" class="content-section">
-        <h2>6. Backup e Projetos</h2>
-        <p>Backup é crítico para proteção de dados. Projetos de infraestrutura requerem planejamento e execução cuidadosa.</p>
-        
-        <h3>Estratégias de Backup:</h3>
-        <ul class="concept-list">
-          <li><strong>Full Backup:</strong> Cópia completa de todos os dados</li>
-          <li><strong>Incremental:</strong> Apenas dados modificados desde último backup</li>
-          <li><strong>Diferencial:</strong> Dados modificados desde último full backup</li>
-          <li><strong>3-2-1 Rule:</strong> 3 cópias, 2 mídias diferentes, 1 fora do site</li>
-        </ul>
-        
-        <h3>Ferramentas Recomendadas:</h3>
-        <ul class="concept-list">
-          <li>Veeam Backup & Replication</li>
-          <li>Acronis True Image</li>
-          <li>Bacula</li>
-          <li>Duplicati</li>
-          <li>rsync (Linux)</li>
-        </ul>
-        
-        <h3>Projetos Típicos:</h3>
-        <ul class="concept-list">
-          <li>Migração de dados para novo servidor</li>
-          <li>Implementação de novo sistema</li>
-          <li>Upgrade de hardware</li>
-          <li>Consolidação de infraestrutura</li>
-          <li>Implementação de segurança</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('backup')">Marcar como Concluído</button>
-      </section>
-
-      <section id="conclusao" class="content-section">
-        <h2>7. Conclusão</h2>
-        <p>O Help Desk é uma carreira desafiadora e gratificante. Profissionais de suporte técnico são essenciais para o funcionamento de qualquer organização.</p>
-        
-        <h3>Próximos Passos:</h3>
-        <ul class="concept-list">
-          <li>Obtenha certificações (CompTIA A+, ITIL, Microsoft)</li>
-          <li>Pratique com laboratórios virtuais</li>
-          <li>Mantenha-se atualizado com novas tecnologias</li>
-          <li>Desenvolva habilidades de comunicação</li>
-          <li>Busque experiência prática em ambientes reais</li>
-        </ul>
-        
-        <h3>Recursos Recomendados:</h3>
-        <ul class="concept-list">
-          <li><strong>Certificações:</strong> CompTIA A+, ITIL Foundation, Microsoft Certified</li>
-          <li><strong>Plataformas de Aprendizado:</strong> Udemy, Coursera, Linux Academy</li>
-          <li><strong>Comunidades:</strong> Reddit r/CompTIA, Stack Overflow, GitHub</li>
-          <li><strong>Documentação:</strong> Microsoft Docs, Linux Man Pages, Cisco Learning</li>
-        </ul>
-        
-        <button class="btn btn-outline" onclick="markSectionComplete('conclusao')">Marcar como Concluído</button>
-      </section>
-
-      <!-- FAQ Section -->
-      <section id="faq" class="faq-section">
-        <h2>Perguntas Frequentes</h2>
-        
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Quanto tempo leva para aprender Help Desk?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Depende do seu background. Com dedicação, 3-6 meses de estudo intenso é suficiente para conseguir seu primeiro emprego. Certificações como CompTIA A+ levam 2-3 meses de preparação.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Preciso de experiência anterior para trabalhar com Help Desk?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Não necessariamente. Muitas empresas contratam iniciantes para posições de Help Desk Nível 1. O importante é demonstrar vontade de aprender e ter conhecimento básico de computadores.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Qual é o salário médio de um profissional de Help Desk?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>No Brasil, um Help Desk Nível 1 ganha entre R$ 2.000 a R$ 3.500. Com experiência e certificações, pode chegar a R$ 5.000+. Profissionais sênior podem ganhar acima de R$ 8.000.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Qual é a melhor certificação para começar?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>CompTIA A+ é a mais reconhecida para iniciantes. ITIL Foundation é excelente para entender processos. Microsoft Certified é bom se trabalhar com Windows.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Como posso praticar sem um ambiente real?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Use máquinas virtuais (VirtualBox, VMware), laboratórios online (TryHackMe, HackTheBox), simuladores de exame e cursos práticos. Crie seu próprio lab em casa.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Newsletter Section -->
-      <section id="newsletter" class="newsletter-section">
-        <h2>Receba Atualizações</h2>
-        <p>Inscreva-se para receber dicas, artigos e recursos sobre Help Desk e suporte técnico.</p>
-        
-        <form id="newsletterForm" class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-          <input type="email" placeholder="Seu email" required class="newsletter-input">
-          <button type="submit" class="btn btn-primary">Inscrever</button>
-        </form>
-        <p class="newsletter-note">Sem spam. Você pode desinscrever a qualquer momento.</p>
-      </section>
-
-      <!-- Contact Section -->
-      <section id="contato" class="contact-section">
-        <h2>Entre em Contato</h2>
-        <p>Tem dúvidas ou sugestões? Entre em contato conosco!</p>
-        
-        <form id="contactForm" class="contact-form" onsubmit="handleContactSubmit(event)">
-          <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" id="name" name="name" required>
-          </div>
+          <h3>O que você aprenderá:</h3>
+          <ul class="concept-list">
+            <li><strong>Fundamentos ITIL 4:</strong> Ciclo de vida dos serviços, gestão de incidentes e mudanças</li>
+            <li><strong>Atendimento ao Cliente:</strong> Técnicas de comunicação, empatia e resolução de problemas</li>
+            <li><strong>Troubleshooting:</strong> Metodologia sistemática para diagnóstico e resolução</li>
+            <li><strong>Infraestrutura:</strong> Hardware, servidores, redes e sistemas operacionais</li>
+            <li><strong>Ferramentas Profissionais:</strong> Softwares essenciais para Help Desk moderno</li>
+          </ul>
           
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="subject">Assunto</label>
-            <input type="text" id="subject" name="subject" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-      </section>
+          <button class="btn btn-outline" onclick="markSectionComplete('intro')">Marcar como Concluído</button>
+        </section>
 
-      <!-- Quiz Section -->
-      <section id="quiz" class="quiz-section">
-        <h2>Quiz Interativo</h2>
-        <p>Teste seus conhecimentos com nosso quiz sobre Help Desk!</p>
-        
-        <button class="btn btn-primary" onclick="startQuiz()">Iniciar Quiz</button>
-        
-        <div id="quizContainer" style="display: none;" class="quiz-container">
-          <div class="quiz-progress">
-            <span id="quizProgress">Questão 1 de 10</span>
-            <div class="quiz-progress-bar">
-              <div id="quizProgressFill" class="quiz-progress-fill"></div>
+        <section id="atendimento" class="content-section">
+          <h2>2. Gestão de Atendimento</h2>
+          <p>A gestão de atendimento é o coração do Help Desk. Envolve receber, registrar, priorizar e resolver chamados de forma eficiente.</p>
+          
+          <h3>Ciclo de Vida de um Chamado:</h3>
+          <ol class="concept-list">
+            <li><strong>Abertura:</strong> Usuário relata o problema via telefone, email ou sistema</li>
+            <li><strong>Registro:</strong> Informações documentadas no sistema de tickets</li>
+            <li><strong>Triagem:</strong> Classificação por prioridade e categoria</li>
+            <li><strong>Atendimento:</strong> Técnico trabalha na resolução</li>
+            <li><strong>Resolução:</strong> Problema solucionado e testado</li>
+            <li><strong>Encerramento:</strong> Feedback do usuário e documentação final</li>
+          </ol>
+          
+          <h3>Conceitos ITIL Essenciais:</h3>
+          <ul class="concept-list">
+            <li><strong>SLA (Service Level Agreement):</strong> Tempo máximo para resolver diferentes tipos de problemas</li>
+            <li><strong>Prioridade vs Urgência:</strong> Como classificar corretamente os chamados</li>
+            <li><strong>Escalação:</strong> Quando e como encaminhar para níveis superiores</li>
+            <li><strong>Conhecimento Base:</strong> Documentar soluções para reutilização</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('atendimento')">Marcar como Concluído</button>
+        </section>
+
+        <section id="hardware" class="content-section">
+          <h2>3. Hardware e Periféricos</h2>
+          <p>Conhecimento de hardware é fundamental para diagnosticar e resolver problemas físicos nos computadores.</p>
+          
+          <h3>Componentes Principais:</h3>
+          <div class="component-grid">
+            <div class="component-card">
+              <h4>Processador (CPU)</h4>
+              <p>Responsável pelo processamento de dados. Marcas principais: Intel e AMD.</p>
+            </div>
+            <div class="component-card">
+              <h4>Memória RAM</h4>
+              <p>Memória volátil para execução de programas. Tipos: DDR3, DDR4, DDR5.</p>
+            </div>
+            <div class="component-card">
+              <h4>Disco Rígido / SSD</h4>
+              <p>Armazenamento permanente. SSDs são mais rápidos e confiáveis.</p>
+            </div>
+            <div class="component-card">
+              <h4>Placa Mãe</h4>
+              <p>Conecta todos os componentes. Diferentes soquetes para diferentes CPUs.</p>
+            </div>
+            <div class="component-card">
+              <h4>Fonte de Alimentação</h4>
+              <p>Fornece energia. Importante verificar potência e estabilidade.</p>
+            </div>
+            <div class="component-card">
+              <h4>Periféricos</h4>
+              <p>Mouse, teclado, monitor, impressora, scanner, etc.</p>
             </div>
           </div>
           
-          <div id="quizContent" class="quiz-content"></div>
-        </div>
-      </section>
+          <h3>Troubleshooting de Hardware:</h3>
+          <ul class="concept-list">
+            <li>Computador não liga → Verificar fonte, cabos, bateria</li>
+            <li>Lentidão → Verificar RAM, disco cheio, processos em background</li>
+            <li>Superaquecimento → Limpar ventiladores, verificar pasta térmica</li>
+            <li>Periféricos não funcionam → Drivers desatualizados ou com defeito</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('hardware')">Marcar como Concluído</button>
+        </section>
 
-      <!-- Resources Section -->
-      <section id="recursos" class="resources-section">
-        <h2>Recursos Gratuitos</h2>
+        <section id="servidores" class="content-section">
+          <h2>4. Servidores e Redes</h2>
+          <p>Entender infraestrutura de servidores e redes é essencial para suporte técnico em ambientes corporativos.</p>
+          
+          <h3>Tipos de Servidores:</h3>
+          <ul class="concept-list">
+            <li><strong>Servidor Web:</strong> Hospeda sites e aplicações web (Apache, Nginx, IIS)</li>
+            <li><strong>Servidor de Banco de Dados:</strong> Armazena e gerencia dados (MySQL, SQL Server, PostgreSQL)</li>
+            <li><strong>Servidor de Arquivos:</strong> Compartilha arquivos na rede (NAS, SMB/CIFS)</li>
+            <li><strong>Servidor de Email:</strong> Gerencia comunicação por email (Exchange, Postfix)</li>
+            <li><strong>Servidor de Autenticação:</strong> Controla acesso (Active Directory, LDAP)</li>
+          </ul>
+          
+          <h3>Conceitos de Rede:</h3>
+          <ul class="concept-list">
+            <li><strong>IP (Internet Protocol):</strong> Endereço único para cada dispositivo</li>
+            <li><strong>DNS (Domain Name System):</strong> Converte nomes em endereços IP</li>
+            <li><strong>DHCP:</strong> Atribui IPs automaticamente</li>
+            <li><strong>Firewall:</strong> Controla tráfego de rede</li>
+            <li><strong>VPN:</strong> Conexão segura remota</li>
+            <li><strong>Roteador:</strong> Conecta diferentes redes</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('servidores')">Marcar como Concluído</button>
+        </section>
+
+        <section id="sistemas-senior" class="content-section">
+          <h2>5. Sistemas Senior</h2>
+          <p>Sistema Senior é um ERP amplamente utilizado em empresas brasileiras. Conhecimento básico é importante para suporte técnico.</p>
+          
+          <h3>Módulos Principais:</h3>
+          <ul class="concept-list">
+            <li><strong>Financeiro:</strong> Contas a pagar/receber, fluxo de caixa</li>
+            <li><strong>Estoque:</strong> Controle de inventário e movimentação</li>
+            <li><strong>Vendas:</strong> Pedidos, cotações, faturamento</li>
+            <li><strong>Compras:</strong> Requisições, pedidos, recebimento</li>
+            <li><strong>Recursos Humanos:</strong> Folha de pagamento, benefícios</li>
+            <li><strong>Produção:</strong> Planejamento e controle de produção</li>
+          </ul>
+          
+          <h3>Problemas Comuns e Soluções:</h3>
+          <ul class="concept-list">
+            <li>Lentidão do sistema → Verificar banco de dados, índices, conexão</li>
+            <li>Erro ao gerar relatório → Validar filtros, permissões, dados</li>
+            <li>Problema de sincronização → Verificar backup, replicação de dados</li>
+            <li>Usuário sem acesso → Revisar permissões, grupos de segurança</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('sistemas-senior')">Marcar como Concluído</button>
+        </section>
+
+        <section id="backup" class="content-section">
+          <h2>6. Backup e Projetos</h2>
+          <p>Backup é crítico para proteção de dados. Projetos de infraestrutura requerem planejamento e execução cuidadosa.</p>
+          
+          <h3>Estratégias de Backup:</h3>
+          <ul class="concept-list">
+            <li><strong>Full Backup:</strong> Cópia completa de todos os dados</li>
+            <li><strong>Incremental:</strong> Apenas dados modificados desde último backup</li>
+            <li><strong>Diferencial:</strong> Dados modificados desde último full backup</li>
+            <li><strong>3-2-1 Rule:</strong> 3 cópias, 2 mídias diferentes, 1 fora do site</li>
+          </ul>
+          
+          <h3>Ferramentas Recomendadas:</h3>
+          <ul class="concept-list">
+            <li>Veeam Backup & Replication</li>
+            <li>Acronis True Image</li>
+            <li>Bacula</li>
+            <li>Duplicati</li>
+            <li>rsync (Linux)</li>
+          </ul>
+          
+          <h3>Projetos Típicos:</h3>
+          <ul class="concept-list">
+            <li>Migração de dados para novo servidor</li>
+            <li>Implementação de novo sistema</li>
+            <li>Upgrade de hardware</li>
+            <li>Consolidação de infraestrutura</li>
+            <li>Implementação de segurança</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('backup')">Marcar como Concluído</button>
+        </section>
+
+        <section id="conclusao" class="content-section">
+          <h2>7. Conclusão</h2>
+          <p>O Help Desk é uma carreira desafiadora e gratificante. Profissionais de suporte técnico são essenciais para o funcionamento de qualquer organização.</p>
+          
+          <h3>Próximos Passos:</h3>
+          <ul class="concept-list">
+            <li>Obtenha certificações (CompTIA A+, ITIL, Microsoft)</li>
+            <li>Pratique com laboratórios virtuais</li>
+            <li>Mantenha-se atualizado com novas tecnologias</li>
+            <li>Desenvolva habilidades de comunicação</li>
+            <li>Busque experiência prática em ambientes reais</li>
+          </ul>
+          
+          <h3>Recursos Recomendados:</h3>
+          <ul class="concept-list">
+            <li><strong>Certificações:</strong> CompTIA A+, ITIL Foundation, Microsoft Certified</li>
+            <li><strong>Plataformas de Aprendizado:</strong> Udemy, Coursera, Linux Academy</li>
+            <li><strong>Comunidades:</strong> Reddit r/CompTIA, Stack Overflow, GitHub</li>
+            <li><strong>Documentação:</strong> Microsoft Docs, Linux Man Pages, Cisco Learning</li>
+          </ul>
+          
+          <button class="btn btn-outline" onclick="markSectionComplete('conclusao')">Marcar como Concluído</button>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+          <h2>Perguntas Frequentes</h2>
+          
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>Quanto tempo leva para aprender Help Desk?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Depende do seu background. Com dedicação, 3-6 meses de estudo intenso é suficiente para conseguir seu primeiro emprego. Certificações como CompTIA A+ levam 2-3 meses de preparação.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>Preciso de experiência anterior para trabalhar com Help Desk?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Não necessariamente. Muitas empresas contratam iniciantes para posições de Help Desk Nível 1. O importante é demonstrar vontade de aprender e ter conhecimento básico de computadores.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>Qual é o salário médio de um profissional de Help Desk?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>No Brasil, um Help Desk Nível 1 ganha entre R$ 2.000 a R$ 3.500. Com experiência e certificações, pode chegar a R$ 5.000+. Profissionais sênior podem ganhar acima de R$ 8.000.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>Qual é a melhor certificação para começar?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>CompTIA A+ é a mais reconhecida para iniciantes. ITIL Foundation é excelente para entender processos. Microsoft Certified é bom se trabalhar com Windows.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span>Como posso praticar sem um ambiente real?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Use máquinas virtuais (VirtualBox, VMware), laboratórios online (TryHackMe, HackTheBox), simuladores de exame e cursos práticos. Crie seu próprio lab em casa.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RECURSOS TAB -->
+      <div class="tab-content" id="recursos-tab">
+        <h1>Recursos Gratuitos</h1>
         
-        <h3>Ferramentas Recomendadas</h3>
+        <h2>Ferramentas Recomendadas</h2>
         <div class="resources-grid">
           <div class="resource-card">
             <h4>TeamViewer</h4>
@@ -513,7 +436,7 @@
           </div>
         </div>
 
-        <h3>Certificações Recomendadas</h3>
+        <h2>Certificações Recomendadas</h2>
         <div class="resources-grid">
           <div class="resource-card">
             <h4>CompTIA A+</h4>
@@ -540,7 +463,7 @@
           </div>
         </div>
 
-        <h3>Plataformas de Aprendizado</h3>
+        <h2>Plataformas de Aprendizado</h2>
         <div class="resources-grid">
           <div class="resource-card">
             <h4>Udemy</h4>
@@ -566,11 +489,30 @@
             <a href="https://www.hackthebox.com" target="_blank" class="resource-link">Visitar →</a>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Blog Section -->
-      <section id="blog" class="blog-section">
-        <h2>Blog</h2>
+      <!-- QUIZ TAB -->
+      <div class="tab-content" id="quiz-tab">
+        <h1>Quiz Interativo</h1>
+        <p>Teste seus conhecimentos com nosso quiz sobre Help Desk!</p>
+        
+        <button class="btn btn-primary" onclick="startQuiz()">Iniciar Quiz</button>
+        
+        <div id="quizContainer" style="display: none;" class="quiz-container">
+          <div class="quiz-progress">
+            <span id="quizProgress">Questão 1 de 10</span>
+            <div class="quiz-progress-bar">
+              <div id="quizProgressFill" class="quiz-progress-fill"></div>
+            </div>
+          </div>
+          
+          <div id="quizContent" class="quiz-content"></div>
+        </div>
+      </div>
+
+      <!-- BLOG TAB -->
+      <div class="tab-content" id="blog-tab">
+        <h1>Blog</h1>
         
         <div class="blog-grid">
           <article class="blog-card">
@@ -615,7 +557,50 @@
             <a href="#" class="blog-link">Ler mais →</a>
           </article>
         </div>
-      </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="newsletter-section">
+          <h2>Receba Atualizações</h2>
+          <p>Inscreva-se para receber dicas, artigos e recursos sobre Help Desk e suporte técnico.</p>
+          
+          <form id="newsletterForm" class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" placeholder="Seu email" required class="newsletter-input">
+            <button type="submit" class="btn btn-primary">Inscrever</button>
+          </form>
+          <p class="newsletter-note">Sem spam. Você pode desinscrever a qualquer momento.</p>
+        </section>
+      </div>
+
+      <!-- CONTATO TAB -->
+      <div class="tab-content" id="contato-tab">
+        <h1>Entre em Contato</h1>
+        <p>Tem dúvidas ou sugestões? Entre em contato conosco!</p>
+        
+        <form id="contactForm" class="contact-form" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Assunto</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+
     </div>
   </main>
 
@@ -634,9 +619,9 @@
       <div class="footer-section">
         <h4>Recursos</h4>
         <ul>
-          <li><a href="#recursos">Ferramentas</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#" onclick="switchTab('recursos')">Ferramentas</a></li>
+          <li><a href="#" onclick="switchTab('blog')">Blog</a></li>
+          <li><a href="#" onclick="switchTab('quiz')">Quiz</a></li>
         </ul>
       </div>
       

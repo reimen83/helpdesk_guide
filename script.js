@@ -1,4 +1,71 @@
 // ============================================
+// SISTEMA DE ABAS
+// ============================================
+
+function switchTab(tabName) {
+  // Remover classe ativa de todos os tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.drawer-tab').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  
+  // Adicionar classe ativa ao tab clicado
+  document.querySelector(`[data-tab="${tabName}"]`)?.classList.add('active');
+  document.getElementById(`${tabName}-tab`)?.classList.add('active');
+  
+  // Fechar drawer se aberto
+  closeDrawer();
+  
+  // Scroll para o topo
+  window.scrollTo(0, 0);
+  
+  // Salvar tab ativo
+  localStorage.setItem('activeTab', tabName);
+}
+
+// Restaurar tab ativo ao carregar página
+window.addEventListener('load', () => {
+  const activeTab = localStorage.getItem('activeTab') || 'home';
+  switchTab(activeTab);
+});
+
+// Event listeners para tabs desktop
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchTab(btn.getAttribute('data-tab'));
+  });
+});
+
+// Event listeners para tabs mobile (drawer)
+document.querySelectorAll('.drawer-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchTab(btn.getAttribute('data-tab'));
+  });
+});
+
+// ============================================
+// DRAWER MOBILE
+// ============================================
+
+const menuToggle = document.getElementById('menuToggle');
+const drawer = document.getElementById('drawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+const drawerClose = document.getElementById('drawerClose');
+
+function openDrawer() {
+  drawer.classList.add('open');
+  drawerOverlay.classList.add('visible');
+}
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawerOverlay.classList.remove('visible');
+}
+
+menuToggle.addEventListener('click', openDrawer);
+drawerClose.addEventListener('click', closeDrawer);
+drawerOverlay.addEventListener('click', closeDrawer);
+
+// ============================================
 // TEMA ESCURO / CLARO
 // ============================================
 
@@ -24,66 +91,6 @@ themeToggle.addEventListener('click', () => {
 });
 
 // ============================================
-// SIDEBAR
-// ============================================
-
-const menuToggle = document.getElementById('menuToggle');
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const closeSidebar = document.getElementById('closeSidebar');
-
-menuToggle.addEventListener('click', () => {
-  sidebar.classList.add('open');
-  sidebarOverlay.classList.add('visible');
-});
-
-closeSidebar.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  sidebarOverlay.classList.remove('visible');
-});
-
-sidebarOverlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  sidebarOverlay.classList.remove('visible');
-});
-
-// Fechar sidebar ao clicar em um link
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('visible');
-  });
-});
-
-// ============================================
-// BREADCRUMB
-// ============================================
-
-const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
-const sectionTitles = {
-  'intro': 'Introdução',
-  'atendimento': 'Gestão de Atendimento',
-  'hardware': 'Hardware e Periféricos',
-  'servidores': 'Servidores e Redes',
-  'sistemas-senior': 'Sistemas Senior',
-  'backup': 'Backup e Projetos',
-  'conclusao': 'Conclusão',
-  'recursos': 'Recursos Gratuitos',
-  'quiz': 'Quiz Interativo',
-  'blog': 'Blog',
-  'contato': 'Contato'
-};
-
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const section = link.getAttribute('data-section');
-    if (section && sectionTitles[section]) {
-      breadcrumbCurrent.textContent = sectionTitles[section];
-    }
-  });
-});
-
-// ============================================
 // PROGRESSO
 // ============================================
 
@@ -93,7 +100,7 @@ const progressText = document.getElementById('progressText');
 
 function updateProgress() {
   const completed = JSON.parse(localStorage.getItem('completedSections') || '[]');
-  const total = Object.keys(sectionTitles).length - 4; // Excluir recursos, quiz, blog, contato
+  const total = 7; // 7 seções de conteúdo
   const percentage = total > 0 ? Math.round((completed.length / total) * 100) : 0;
   
   progressFill.style.width = percentage + '%';
@@ -101,34 +108,270 @@ function updateProgress() {
   
   if (percentage === 0) {
     progressText.textContent = 'Comece a estudar para acompanhar seu progresso!';
-  } else if (percentage < 50) {
-    progressText.textContent = 'Ótimo começo! Continue estudando.';
-  } else if (percentage < 100) {
-    progressText.textContent = 'Você está quase lá! Termine as últimas seções.';
+  } else if (percentage === 100) {
+    progressText.textContent = '🎉 Parabéns! Você completou todo o conteúdo!';
   } else {
-    progressText.textContent = '🎉 Parabéns! Você completou todo o guia!';
+    progressText.textContent = `Você completou ${completed.length} de ${total} seções`;
   }
 }
 
 function markSectionComplete(sectionId) {
   let completed = JSON.parse(localStorage.getItem('completedSections') || '[]');
+  
   if (!completed.includes(sectionId)) {
     completed.push(sectionId);
     localStorage.setItem('completedSections', JSON.stringify(completed));
     updateProgress();
-    alert('✓ Seção marcada como concluída!');
+    
+    // Feedback visual
+    const btn = event.target;
+    btn.textContent = '✓ Concluído';
+    btn.style.opacity = '0.6';
+    btn.disabled = true;
   }
 }
 
+// Atualizar progresso ao carregar
 updateProgress();
 
 // ============================================
 // FAQ
 // ============================================
 
-function toggleFAQ(button) {
-  const item = button.parentElement;
-  item.classList.toggle('open');
+function toggleFAQ(element) {
+  const faqItem = element.parentElement;
+  const answer = faqItem.querySelector('.faq-answer');
+  const icon = element.querySelector('.faq-icon');
+  
+  faqItem.classList.toggle('open');
+  
+  if (faqItem.classList.contains('open')) {
+    icon.textContent = '−';
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    icon.textContent = '+';
+    answer.style.maxHeight = '0';
+  }
+}
+
+// ============================================
+// QUIZ
+// ============================================
+
+const quizData = [
+  {
+    question: 'O que significa ITIL?',
+    options: [
+      'Information Technology Infrastructure Library',
+      'Information Technology Integration Level',
+      'Internet Technology Infrastructure List',
+      'Information Technology Internet Link'
+    ],
+    correct: 0
+  },
+  {
+    question: 'Qual é o primeiro passo no ciclo de vida de um chamado?',
+    options: ['Resolução', 'Abertura', 'Encerramento', 'Triagem'],
+    correct: 1
+  },
+  {
+    question: 'O que é SLA?',
+    options: [
+      'Service Level Agreement',
+      'System Load Analysis',
+      'Software License Agreement',
+      'Service Link Adapter'
+    ],
+    correct: 0
+  },
+  {
+    question: 'Qual tipo de memória é volátil?',
+    options: ['ROM', 'RAM', 'SSD', 'HD'],
+    correct: 1
+  },
+  {
+    question: 'O que faz um Firewall?',
+    options: [
+      'Aumenta a velocidade da internet',
+      'Controla o tráfego de rede',
+      'Cria backups automáticos',
+      'Limpa arquivos temporários'
+    ],
+    correct: 1
+  },
+  {
+    question: 'Qual é a regra 3-2-1 de backup?',
+    options: [
+      '3 cópias, 2 mídias diferentes, 1 fora do site',
+      '3 servidores, 2 datacenters, 1 nuvem',
+      '3 dias, 2 semanas, 1 mês',
+      '3 GB, 2 TB, 1 PB'
+    ],
+    correct: 0
+  },
+  {
+    question: 'O que significa DNS?',
+    options: [
+      'Domain Name System',
+      'Digital Network Service',
+      'Data Network Security',
+      'Domain Network Setup'
+    ],
+    correct: 0
+  },
+  {
+    question: 'Qual é a melhor certificação para iniciantes em Help Desk?',
+    options: [
+      'ITIL Foundation',
+      'CompTIA A+',
+      'Microsoft Certified',
+      'Linux Foundation'
+    ],
+    correct: 1
+  },
+  {
+    question: 'O que é troubleshooting?',
+    options: [
+      'Documentação de problemas',
+      'Metodologia sistemática para diagnóstico e resolução',
+      'Criação de tickets',
+      'Backup de dados'
+    ],
+    correct: 1
+  },
+  {
+    question: 'Qual é o tempo médio de estudo para CompTIA A+?',
+    options: [
+      '1 mês',
+      '6 meses',
+      '2-3 meses',
+      '1 ano'
+    ],
+    correct: 2
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function startQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById('quizContainer').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  const quiz = quizData[currentQuestion];
+  const container = document.getElementById('quizContent');
+  
+  const progress = Math.round(((currentQuestion + 1) / quizData.length) * 100);
+  document.getElementById('quizProgress').textContent = `Questão ${currentQuestion + 1} de ${quizData.length}`;
+  document.getElementById('quizProgressFill').style.width = progress + '%';
+  
+  let html = `
+    <div class="quiz-question">
+      <h3>${quiz.question}</h3>
+      <div class="quiz-options">
+  `;
+  
+  quiz.options.forEach((option, index) => {
+    html += `
+      <button class="quiz-option" onclick="answerQuestion(${index})">
+        ${option}
+      </button>
+    `;
+  });
+  
+  html += '</div></div>';
+  container.innerHTML = html;
+}
+
+function answerQuestion(index) {
+  const quiz = quizData[currentQuestion];
+  
+  if (index === quiz.correct) {
+    score++;
+  }
+  
+  currentQuestion++;
+  
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    showQuizResult();
+  }
+}
+
+function showQuizResult() {
+  const percentage = Math.round((score / quizData.length) * 100);
+  const container = document.getElementById('quizContent');
+  
+  let message = '';
+  if (percentage === 100) {
+    message = '🎉 Perfeito! Você acertou todas!';
+  } else if (percentage >= 80) {
+    message = '👏 Excelente! Você tem bom conhecimento!';
+  } else if (percentage >= 60) {
+    message = '👍 Bom! Continue estudando!';
+  } else {
+    message = '📚 Estude mais e tente novamente!';
+  }
+  
+  container.innerHTML = `
+    <div class="quiz-result">
+      <h2>${message}</h2>
+      <p class="result-score">Você acertou ${score} de ${quizData.length} questões</p>
+      <p class="result-percentage">${percentage}%</p>
+      <button class="btn btn-primary" onclick="startQuiz()">Fazer Novamente</button>
+    </div>
+  `;
+}
+
+// ============================================
+// DOWNLOAD PDF
+// ============================================
+
+function downloadPDF(type) {
+  const files = {
+    'mini-curso': 'mini_curso_helpdesk.md',
+    'guia-rapido': 'guia_rapido_referencias.md'
+  };
+  
+  if (files[type]) {
+    window.open(files[type], '_blank');
+  }
+}
+
+// ============================================
+// NEWSLETTER
+// ============================================
+
+function handleNewsletterSubmit(event) {
+  event.preventDefault();
+  const email = event.target.querySelector('.newsletter-input').value;
+  
+  if (email) {
+    alert(`Obrigado! Você foi inscrito com o email: ${email}`);
+    event.target.reset();
+  }
+}
+
+// ============================================
+// CONTATO
+// ============================================
+
+function handleContactSubmit(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const subject = document.getElementById('subject').value;
+  const message = document.getElementById('message').value;
+  
+  // Simular envio
+  alert(`Obrigado ${name}! Sua mensagem foi recebida. Entraremos em contato em breve.`);
+  event.target.reset();
 }
 
 // ============================================
@@ -140,424 +383,69 @@ const searchModal = document.getElementById('searchModal');
 const searchModalInput = document.getElementById('searchModalInput');
 const searchResults = document.getElementById('searchResults');
 
-const searchableContent = [
-  { title: 'Introdução', section: 'intro', text: 'Fundamentos de Help Desk' },
-  { title: 'Gestão de Atendimento', section: 'atendimento', text: 'Ciclo de vida de um chamado' },
-  { title: 'Hardware e Periféricos', section: 'hardware', text: 'Componentes e troubleshooting' },
-  { title: 'Servidores e Redes', section: 'servidores', text: 'Infraestrutura e conceitos' },
-  { title: 'Sistemas Senior', section: 'sistemas-senior', text: 'ERP e módulos principais' },
-  { title: 'Backup e Projetos', section: 'backup', text: 'Estratégias e ferramentas' },
-  { title: 'Conclusão', section: 'conclusao', text: 'Próximos passos' },
-  { title: 'Recursos Gratuitos', section: 'recursos', text: 'Ferramentas e plataformas' },
-  { title: 'Quiz Interativo', section: 'quiz', text: 'Teste seus conhecimentos' },
-  { title: 'Blog', section: 'blog', text: 'Artigos e dicas' },
-  { title: 'Contato', section: 'contato', text: 'Entre em contato' },
-  { title: 'ITIL', section: 'atendimento', text: 'Conceitos ITIL essenciais' },
-  { title: 'SLA', section: 'atendimento', text: 'Service Level Agreement' },
-  { title: 'Troubleshooting', section: 'hardware', text: 'Metodologia de diagnóstico' },
-  { title: 'Certificações', section: 'recursos', text: 'CompTIA A+, ITIL, Microsoft' }
-];
-
-function performSearch(query) {
-  if (!query.trim()) {
-    searchResults.innerHTML = '';
-    return;
-  }
-  
-  const results = searchableContent.filter(item =>
-    item.title.toLowerCase().includes(query.toLowerCase()) ||
-    item.text.toLowerCase().includes(query.toLowerCase())
-  );
-  
-  if (results.length === 0) {
-    searchResults.innerHTML = '<div class="search-result-item"><div class="search-result-text">Nenhum resultado encontrado</div></div>';
-    return;
-  }
-  
-  searchResults.innerHTML = results.map(result => `
-    <div class="search-result-item" onclick="navigateToSection('${result.section}')">
-      <div class="search-result-title">${result.title}</div>
-      <div class="search-result-text">${result.text}</div>
-    </div>
-  `).join('');
-}
-
-function navigateToSection(section) {
-  closeSearchModal();
-  const element = document.getElementById(section);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-    breadcrumbCurrent.textContent = sectionTitles[section] || section;
-  }
-}
-
-function openSearchModal() {
-  searchModal.classList.add('open');
-  searchModalInput.focus();
-}
-
-function closeSearchModal() {
-  searchModal.classList.remove('open');
-  searchResults.innerHTML = '';
-  searchModalInput.value = '';
-}
-
-// Atalho Ctrl+K para abrir busca
+// Abrir modal com Ctrl+K ou Cmd+K
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault();
-    openSearchModal();
+    searchModal.classList.add('active');
+    searchModalInput.focus();
   }
-  
+});
+
+// Fechar modal com Escape
+document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeSearchModal();
   }
 });
 
-searchInput.addEventListener('click', openSearchModal);
-searchModalInput.addEventListener('input', (e) => performSearch(e.target.value));
-document.getElementById('searchModal').addEventListener('click', (e) => {
-  if (e.target === searchModal) closeSearchModal();
+function closeSearchModal() {
+  searchModal.classList.remove('active');
+  searchModalInput.value = '';
+  searchResults.innerHTML = '';
+}
+
+// Buscar conteúdo
+searchModalInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  
+  if (query.length < 2) {
+    searchResults.innerHTML = '';
+    return;
+  }
+  
+  const sections = [
+    { title: 'Introdução', tab: 'conteudo', text: 'Fundamentos ITIL, atendimento ao cliente' },
+    { title: 'Hardware', tab: 'conteudo', text: 'CPU, RAM, SSD, periféricos' },
+    { title: 'Servidores', tab: 'conteudo', text: 'Tipos de servidores, redes, IP, DNS' },
+    { title: 'Backup', tab: 'conteudo', text: 'Estratégias de backup, ferramentas' },
+    { title: 'Quiz', tab: 'quiz', text: 'Teste seus conhecimentos' },
+    { title: 'Blog', tab: 'blog', text: 'Artigos e dicas' },
+    { title: 'Recursos', tab: 'recursos', text: 'Ferramentas e certificações' },
+    { title: 'Contato', tab: 'contato', text: 'Entre em contato conosco' }
+  ];
+  
+  const results = sections.filter(s => 
+    s.title.toLowerCase().includes(query) || 
+    s.text.toLowerCase().includes(query)
+  );
+  
+  if (results.length === 0) {
+    searchResults.innerHTML = '<p class="search-no-results">Nenhum resultado encontrado</p>';
+    return;
+  }
+  
+  searchResults.innerHTML = results.map(result => `
+    <div class="search-result" onclick="switchTab('${result.tab}'); closeSearchModal();">
+      <h4>${result.title}</h4>
+      <p>${result.text}</p>
+    </div>
+  `).join('');
 });
 
-// ============================================
-// FORMULÁRIOS
-// ============================================
-
-function handleContactSubmit(event) {
-  event.preventDefault();
-  const form = event.target;
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value;
-  const message = document.getElementById('message').value;
-  
-  // Enviar para Formspree
-  fetch('https://formspree.io/f/2917895017215295327', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      subject,
-      message
-    })
-  })
-  .then(response => {
-    if (response.ok) {
-      alert('✓ Mensagem enviada com sucesso!');
-      form.reset();
-    } else {
-      alert('Erro ao enviar mensagem. Tente novamente.');
-    }
-  })
-  .catch(error => {
-    console.error('Erro:', error);
-    alert('Erro ao enviar mensagem. Tente novamente.');
-  });
-}
-
-function handleNewsletterSubmit(event) {
-  event.preventDefault();
-  const email = event.target.querySelector('.newsletter-input').value;
-  
-  // Aqui você pode integrar com Mailchimp ou outro serviço
-  alert('✓ Inscrição realizada com sucesso! Verifique seu email.');
-  event.target.reset();
-}
-
-// ============================================
-// QUIZ
-// ============================================
-
-const quizQuestions = [
-  {
-    question: 'O que significa ITIL?',
-    options: [
-      'Information Technology Infrastructure Library',
-      'Internet Technology Integration List',
-      'IT Infrastructure and Learning',
-      'Information Tech Integration Level'
-    ],
-    correct: 0
-  },
-  {
-    question: 'Qual é o objetivo principal do Help Desk?',
-    options: [
-      'Vender produtos',
-      'Fornecer suporte técnico aos usuários',
-      'Gerenciar banco de dados',
-      'Desenvolver software'
-    ],
-    correct: 1
-  },
-  {
-    question: 'O que é SLA?',
-    options: [
-      'Service Level Agreement - Acordo de nível de serviço',
-      'Software License Agreement',
-      'System Load Analysis',
-      'Secure Layer Authentication'
-    ],
-    correct: 0
-  },
-  {
-    question: 'Qual é a ordem correta do ciclo de vida de um chamado?',
-    options: [
-      'Abertura → Triagem → Atendimento → Resolução → Encerramento',
-      'Triagem → Abertura → Atendimento → Encerramento → Resolução',
-      'Atendimento → Abertura → Triagem → Resolução → Encerramento',
-      'Encerramento → Resolução → Atendimento → Triagem → Abertura'
-    ],
-    correct: 0
-  },
-  {
-    question: 'Qual componente é responsável pelo processamento de dados?',
-    options: [
-      'RAM',
-      'Processador (CPU)',
-      'Disco Rígido',
-      'Placa Mãe'
-    ],
-    correct: 1
-  },
-  {
-    question: 'O que é DNS?',
-    options: [
-      'Data Network System',
-      'Domain Name System - Converte nomes em endereços IP',
-      'Direct Network Service',
-      'Dynamic Network Setup'
-    ],
-    correct: 1
-  },
-  {
-    question: 'Qual é a regra 3-2-1 de backup?',
-    options: [
-      '3 cópias, 2 mídias diferentes, 1 fora do site',
-      '3 mídias, 2 cópias, 1 backup',
-      '3 backups, 2 servidores, 1 nuvem',
-      '3 dias, 2 semanas, 1 mês'
-    ],
-    correct: 0
-  },
-  {
-    question: 'Qual é o tipo de backup que copia apenas dados modificados desde o último backup?',
-    options: [
-      'Full Backup',
-      'Incremental Backup',
-      'Diferencial Backup',
-      'Snapshot Backup'
-    ],
-    correct: 1
-  },
-  {
-    question: 'O que significa escalação em Help Desk?',
-    options: [
-      'Aumentar o preço do serviço',
-      'Encaminhar um chamado para um nível superior',
-      'Resolver rapidamente um problema',
-      'Documentar a solução'
-    ],
-    correct: 1
-  },
-  {
-    question: 'Qual certificação é mais recomendada para iniciantes em Help Desk?',
-    options: [
-      'ITIL Expert',
-      'CompTIA A+',
-      'AWS Certified',
-      'Kubernetes Administrator'
-    ],
-    correct: 1
+// Fechar modal ao clicar fora
+searchModal.addEventListener('click', (e) => {
+  if (e.target === searchModal) {
+    closeSearchModal();
   }
-];
-
-let currentQuizQuestion = 0;
-let quizScore = 0;
-
-function startQuiz() {
-  currentQuizQuestion = 0;
-  quizScore = 0;
-  document.getElementById('quizContainer').style.display = 'block';
-  showQuizQuestion();
-}
-
-function showQuizQuestion() {
-  const question = quizQuestions[currentQuizQuestion];
-  const progress = ((currentQuizQuestion + 1) / quizQuestions.length) * 100;
-  
-  document.getElementById('quizProgress').textContent = `Questão ${currentQuizQuestion + 1} de ${quizQuestions.length}`;
-  document.getElementById('quizProgressFill').style.width = progress + '%';
-  
-  const html = `
-    <div class="quiz-question">
-      <h3>${question.question}</h3>
-      <div class="quiz-options">
-        ${question.options.map((option, index) => `
-          <button class="quiz-option" onclick="answerQuestion(${index})">
-            ${String.fromCharCode(65 + index)}) ${option}
-          </button>
-        `).join('')}
-      </div>
-    </div>
-  `;
-  
-  document.getElementById('quizContent').innerHTML = html;
-}
-
-function answerQuestion(index) {
-  const question = quizQuestions[currentQuizQuestion];
-  if (index === question.correct) {
-    quizScore++;
-  }
-  
-  currentQuizQuestion++;
-  
-  if (currentQuizQuestion < quizQuestions.length) {
-    showQuizQuestion();
-  } else {
-    showQuizResults();
-  }
-}
-
-function showQuizResults() {
-  const percentage = Math.round((quizScore / quizQuestions.length) * 100);
-  const html = `
-    <div class="quiz-results">
-      <h3>Resultado do Quiz</h3>
-      <div class="quiz-score">
-        <div class="score-number">${quizScore}/${quizQuestions.length}</div>
-        <div class="score-percentage">${percentage}%</div>
-      </div>
-      <p class="score-message">
-        ${percentage >= 80 ? '🎉 Excelente! Você tem ótimo conhecimento!' :
-          percentage >= 60 ? '👍 Bom resultado! Continue estudando.' :
-          percentage >= 40 ? '📚 Você precisa estudar mais.' :
-          '💪 Continue praticando!'}
-      </p>
-      <button class="btn btn-primary" onclick="location.reload()">Fazer Quiz Novamente</button>
-    </div>
-  `;
-  
-  document.getElementById('quizContent').innerHTML = html;
-}
-
-// Estilos para quiz
-const quizStyles = `
-  .quiz-question h3 {
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-  }
-  
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  
-  .quiz-option {
-    padding: 1rem;
-    border: 2px solid var(--border);
-    border-radius: 0.5rem;
-    background-color: var(--background);
-    color: var(--foreground);
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.3s ease;
-    font-weight: 500;
-  }
-  
-  .quiz-option:hover {
-    border-color: var(--primary);
-    background-color: var(--card-bg);
-  }
-  
-  .quiz-results {
-    text-align: center;
-  }
-  
-  .quiz-score {
-    margin: 2rem 0;
-  }
-  
-  .score-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-  }
-  
-  .score-percentage {
-    font-size: 1.5rem;
-    color: var(--muted);
-  }
-  
-  .score-message {
-    font-size: 1.125rem;
-    margin: 1.5rem 0;
-    color: var(--foreground);
-  }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = quizStyles;
-document.head.appendChild(styleSheet);
-
-// ============================================
-// DOWNLOAD PDF
-// ============================================
-
-function downloadPDF(type) {
-  alert('✓ Download iniciado! Você receberá o arquivo em breve.\n\nNota: Esta é uma versão de demonstração. Para acessar os PDFs completos, entre em contato conosco.');
-}
-
-// ============================================
-// INICIALIZAÇÃO
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Atualizar breadcrumb inicial
-  breadcrumbCurrent.textContent = 'Introdução';
-  
-  // Scroll suave para seções
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href !== '#' && href !== '#home') {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
-  });
-});
-
-// ============================================
-// ANALYTICS (Opcional)
-// ============================================
-
-function trackEvent(eventName, eventData = {}) {
-  // Implementar com Google Analytics ou similar
-  console.log('Event:', eventName, eventData);
-}
-
-// Rastrear seções visualizadas
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const sectionId = entry.target.id;
-      if (sectionId) {
-        trackEvent('section_viewed', { section: sectionId });
-      }
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.content-section').forEach(section => {
-  observer.observe(section);
 });
