@@ -2,5 +2,11 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
-  "installCommand": ""
+  "installCommand": "",
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
 }
