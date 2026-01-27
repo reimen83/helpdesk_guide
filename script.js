@@ -349,12 +349,37 @@ function downloadPDF(type) {
 
 function handleNewsletterSubmit(event) {
   event.preventDefault();
-  const email = event.target.querySelector('.newsletter-input').value;
+  const form = event.target;
+  const email = form.querySelector('.newsletter-input').value;
   
-  if (email) {
-    alert(`Obrigado! Você foi inscrito com o email: ${email}`);
-    event.target.reset();
+  if (!email) {
+    alert('Por favor, insira um email válido.');
+    return;
   }
+  
+  fetch('https://formspree.io/f/xyzjpwqk', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      email: email,
+      _subject: 'Nova inscrição na Newsletter - Help Desk Guide'
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('✅ Obrigado! Você foi inscrito com sucesso. Verifique seu email.');
+      form.reset();
+    } else {
+      alert('❌ Erro ao inscrever. Tente novamente.');
+    }
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    alert('❌ Erro ao enviar. Verifique sua conexão.');
+  });
 }
 
 // ============================================
@@ -363,15 +388,196 @@ function handleNewsletterSubmit(event) {
 
 function handleContactSubmit(event) {
   event.preventDefault();
+  const form = event.target;
   
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
   
-  // Simular envio
-  alert(`Obrigado ${name}! Sua mensagem foi recebida. Entraremos em contato em breve.`);
-  event.target.reset();
+  if (!name || !email || !subject || !message) {
+    alert('Por favor, preencha todos os campos.');
+    return;
+  }
+  
+  fetch('https://formspree.io/f/xyzjpwqk', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+      _subject: 'Novo contato - ' + subject
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('✅ Obrigado ' + name + '! Sua mensagem foi enviada. Entraremos em contato em breve.');
+      form.reset();
+    } else {
+      alert('❌ Erro ao enviar. Tente novamente.');
+    }
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    alert('❌ Erro ao enviar. Verifique sua conexão.');
+  });
+}
+
+// ============================================
+// BLOG - LER ARTIGOS
+// ============================================
+
+const blogArticles = {
+  'dicas-atendimento': {
+    title: '10 Dicas para Melhorar seu Atendimento no Help Desk',
+    date: '24 de Janeiro de 2026',
+    content: `<h2>10 Dicas para Melhorar seu Atendimento no Help Desk</h2>
+      <p><strong>Publicado em:</strong> 24 de Janeiro de 2026</p>
+      <p>O atendimento de qualidade é a base de um Help Desk eficiente. Aqui estão 10 dicas práticas para melhorar significativamente a sua performance:</p>
+      <h3>1. Ouça Atentamente</h3>
+      <p>Não interrompa o cliente. Deixe-o explicar completamente o problema antes de oferecer soluções.</p>
+      <h3>2. Seja Empatético</h3>
+      <p>Entenda a frustração do cliente. Mostre que você se importa e está ali para ajudar.</p>
+      <h3>3. Comunique-se Claramente</h3>
+      <p>Use linguagem simples e evite jargão técnico desnecessário.</p>
+      <h3>4. Seja Proativo</h3>
+      <p>Antecipe problemas e ofereça soluções antes que o cliente as solicite.</p>
+      <h3>5. Documente Tudo</h3>
+      <p>Mantenha registros detalhados de todos os chamados para referência futura.</p>
+      <h3>6. Siga Procedimentos</h3>
+      <p>Respeite os processos estabelecidos para garantir consistência.</p>
+      <h3>7. Aprenda Continuamente</h3>
+      <p>Invista em treinamento e desenvolvimento profissional.</p>
+      <h3>8. Gerencie Seu Tempo</h3>
+      <p>Priorize chamados e gerencie prazos eficientemente.</p>
+      <h3>9. Mantenha a Calma</h3>
+      <p>Sob pressão, manter a compostura é essencial.</p>
+      <h3>10. Busque Feedback</h3>
+      <p>Sempre pergunte aos clientes como foi sua experiência e melhore continuamente.</p>`
+  },
+  'comandos-windows': {
+    title: 'Guia Completo: Comandos Windows Essenciais',
+    date: '20 de Janeiro de 2026',
+    content: `<h2>Guia Completo: Comandos Windows Essenciais</h2>
+      <p><strong>Publicado em:</strong> 20 de Janeiro de 2026</p>
+      <p>Domine os comandos mais importantes do Windows para troubleshooting e administração de sistemas.</p>
+      <h3>Comandos de Sistema</h3>
+      <p><code>ipconfig</code> - Exibe configuração de rede</p>
+      <p><code>systeminfo</code> - Informações do sistema</p>
+      <p><code>tasklist</code> - Lista de processos em execução</p>
+      <p><code>taskkill</code> - Encerra um processo</p>
+      <h3>Comandos de Rede</h3>
+      <p><code>ping</code> - Testa conectividade</p>
+      <p><code>tracert</code> - Rastreia rota de pacotes</p>
+      <p><code>netstat</code> - Exibe conexões de rede</p>
+      <p><code>nslookup</code> - Consulta DNS</p>
+      <h3>Comandos de Disco</h3>
+      <p><code>chkdsk</code> - Verifica integridade do disco</p>
+      <p><code>defrag</code> - Desfragmenta disco</p>
+      <p><code>diskpart</code> - Gerencia partições</p>`
+  },
+  'linux-helpdesk': {
+    title: 'Linux para Help Desk: Primeiros Passos',
+    date: '15 de Janeiro de 2026',
+    content: `<h2>Linux para Help Desk: Primeiros Passos</h2>
+      <p><strong>Publicado em:</strong> 15 de Janeiro de 2026</p>
+      <p>Introdução ao Linux para profissionais de Help Desk.</p>
+      <h3>O que é Linux?</h3>
+      <p>Linux é um sistema operacional de código aberto baseado em Unix.</p>
+      <h3>Distribuições Populares</h3>
+      <p><strong>Ubuntu:</strong> Fácil de usar, ideal para iniciantes</p>
+      <p><strong>CentOS:</strong> Estabilidade para servidores</p>
+      <p><strong>Debian:</strong> Confiável e versátil</p>
+      <h3>Comandos Básicos</h3>
+      <p><code>ls</code> - Lista arquivos</p>
+      <p><code>cd</code> - Muda de diretório</p>
+      <p><code>pwd</code> - Mostra diretório atual</p>
+      <p><code>mkdir</code> - Cria diretório</p>
+      <p><code>sudo</code> - Executa como administrador</p>`
+  },
+  'comptia-a-plus': {
+    title: 'Como Preparar-se para Certificação CompTIA A+',
+    date: '10 de Janeiro de 2026',
+    content: `<h2>Como Preparar-se para Certificação CompTIA A+</h2>
+      <p><strong>Publicado em:</strong> 10 de Janeiro de 2026</p>
+      <p>Estratégia completa para passar no exame CompTIA A+.</p>
+      <h3>Sobre a Certificação</h3>
+      <p>CompTIA A+ é a certificação mais procurada para profissionais de Help Desk.</p>
+      <h3>Tempo de Preparação</h3>
+      <p>Recomenda-se 2-3 meses de estudo intenso.</p>
+      <h3>Tópicos Principais</h3>
+      <p>- Hardware e componentes</p>
+      <p>- Sistemas operacionais</p>
+      <p>- Redes</p>
+      <p>- Segurança</p>
+      <p>- Troubleshooting</p>
+      <h3>Recursos de Estudo</h3>
+      <p>- Livros oficiais CompTIA</p>
+      <p>- Cursos online (Udemy, Pluralsight)</p>
+      <p>- Simulações de exame</p>`
+  },
+  'troubleshooting-rede': {
+    title: 'Troubleshooting de Rede: Passo a Passo',
+    date: '5 de Janeiro de 2026',
+    content: `<h2>Troubleshooting de Rede: Passo a Passo</h2>
+      <p><strong>Publicado em:</strong> 5 de Janeiro de 2026</p>
+      <p>Metodologia sistemática para diagnosticar e resolver problemas de rede.</p>
+      <h3>Passo 1: Entenda o Problema</h3>
+      <p>Pergunte ao usuário: Quando começou? O que estava fazendo?</p>
+      <h3>Passo 2: Teste a Conectividade</h3>
+      <p>Use ping, ipconfig e tracert para diagnosticar.</p>
+      <h3>Passo 3: Verifique o Hardware</h3>
+      <p>Cabos, placas de rede, switches e roteadores.</p>
+      <h3>Passo 4: Analise Logs</h3>
+      <p>Verifique logs de rede e firewall.</p>
+      <h3>Passo 5: Implemente a Solução</h3>
+      <p>Teste e documente a resolução.</p>`
+  },
+  'tendencias-2026': {
+    title: 'Tendências em Suporte Técnico para 2026',
+    date: '1 de Janeiro de 2026',
+    content: `<h2>Tendências em Suporte Técnico para 2026</h2>
+      <p><strong>Publicado em:</strong> 1 de Janeiro de 2026</p>
+      <p>Conheça as tendências que vão dominar o mercado de Help Desk em 2026.</p>
+      <h3>1. Automação com IA</h3>
+      <p>Chatbots e IA para resolver problemas simples automaticamente.</p>
+      <h3>2. Cloud Computing</h3>
+      <p>Mais empresas migrando para nuvem, exigindo novas habilidades.</p>
+      <h3>3. Segurança Cibernética</h3>
+      <p>Profissionais de Help Desk precisam entender segurança.</p>
+      <h3>4. Trabalho Remoto</h3>
+      <p>Suporte remoto se torna padrão.</p>
+      <h3>5. Certificações em Demanda</h3>
+      <p>CompTIA A+, Azure, AWS são altamente procuradas.</p>`
+  }
+};
+
+function readBlogArticle(articleId) {
+  const article = blogArticles[articleId];
+  if (!article) {
+    alert('Artigo não encontrado.');
+    return;
+  }
+  
+  // Criar modal
+  const modal = document.createElement('div');
+  modal.className = 'article-modal';
+  modal.innerHTML = `
+    <div class="article-modal-content">
+      <button class="article-modal-close" onclick="this.closest('.article-modal').remove()">✕</button>
+      <div class="article-body">
+        ${article.content}
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  modal.style.display = 'flex';
 }
 
 // ============================================
