@@ -2,7 +2,8 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "framework": null,
-  "installCommand": "pnpm install",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "nodeVersion": "22.13.0",
   "env": {
     "NODE_ENV": "production"
   },
