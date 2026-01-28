@@ -344,6 +344,47 @@ function downloadPDF(type) {
 }
 
 // ============================================
+// TOAST NOTIFICATIONS
+// ============================================
+
+function showToast(message, type = 'info', duration = 3000) {
+  // Criar container se não existir
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  
+  // Criar toast
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  
+  // Ícones para cada tipo
+  const icons = {
+    success: '✓',
+    error: '✕',
+    info: 'ℹ',
+    warning: '⚠'
+  };
+  
+  toast.innerHTML = `
+    <span class="toast-icon">${icons[type] || icons.info}</span>
+    <span class="toast-message">${message}</span>
+  `;
+  
+  container.appendChild(toast);
+  
+  // Remover toast após duração
+  setTimeout(() => {
+    toast.classList.add('removing');
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, duration);
+}
+
+// ============================================
 // NEWSLETTER
 // ============================================
 
@@ -353,7 +394,7 @@ function handleNewsletterSubmit(event) {
   const email = form.querySelector('.newsletter-input').value;
   
   if (!email) {
-    alert('Por favor, insira um email válido.');
+    showToast('Por favor, insira um email válido.', 'warning');
     return;
   }
   
@@ -370,15 +411,15 @@ function handleNewsletterSubmit(event) {
   })
   .then(response => {
     if (response.ok) {
-      alert('✅ Obrigado! Você foi inscrito com sucesso. Verifique seu email.');
+      showToast('Obrigado! Você foi inscrito com sucesso. Verifique seu email.', 'success');
       form.reset();
     } else {
-      alert('❌ Erro ao inscrever. Tente novamente.');
+      showToast('Erro ao inscrever. Tente novamente.', 'error');
     }
   })
   .catch(error => {
     console.error('Erro:', error);
-    alert('❌ Erro ao enviar. Verifique sua conexão.');
+    showToast('Erro ao enviar. Verifique sua conexão.', 'error');
   });
 }
 
@@ -396,7 +437,7 @@ function handleContactSubmit(event) {
   const message = document.getElementById('message').value;
   
   if (!name || !email || !subject || !message) {
-    alert('Por favor, preencha todos os campos.');
+    showToast('Por favor, preencha todos os campos.', 'warning');
     return;
   }
   
@@ -416,15 +457,15 @@ function handleContactSubmit(event) {
   })
   .then(response => {
     if (response.ok) {
-      alert('✅ Obrigado ' + name + '! Sua mensagem foi enviada. Entraremos em contato em breve.');
+      showToast('Obrigado ' + name + '! Sua mensagem foi enviada. Entraremos em contato em breve.', 'success');
       form.reset();
     } else {
-      alert('❌ Erro ao enviar. Tente novamente.');
+      showToast('Erro ao enviar. Tente novamente.', 'error');
     }
   })
   .catch(error => {
     console.error('Erro:', error);
-    alert('❌ Erro ao enviar. Verifique sua conexão.');
+    showToast('Erro ao enviar. Verifique sua conexão.', 'error');
   });
 }
 
