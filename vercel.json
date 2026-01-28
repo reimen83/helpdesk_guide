@@ -1,11 +1,10 @@
 {
-  "buildCommand": "pnpm build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "installCommand": "pnpm install --shamefully-hoist",
+  "installCommand": "npm install",
   "env": {
-    "NODE_ENV": "production",
-    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org"
+    "NODE_ENV": "production"
   },
   "rewrites": [
     {
