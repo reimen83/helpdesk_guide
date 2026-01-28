@@ -15,3 +15,7 @@
 - [x] Implementar Chat com IA Generativa
 - [ ] Criar página de Perfil do usuário com progresso de aprendizado
 - [ ] Implementar Blog Dinâmico com notícias tech
+
+# Bugs Reportados
+
+- [x] PDFs de materiais não estão abrindo ao fazer download

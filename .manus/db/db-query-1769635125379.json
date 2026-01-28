@@ -1,0 +1,23 @@
+{
+  "query": "SELECT * FROM materials LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2F5rqD8cJ63W6KH.ff46c3c87d90 --database FEHVCygW4T5Ut9fR7hCHgq --execute SELECT * FROM materials LIMIT 1;",
+  "rows": [
+    {
+      "id": "1",
+      "courseId": "1",
+      "lessonId": "1",
+      "title": "Fundamentos de Help Desk",
+      "description": "Material de referência sobre fundamentos",
+      "fileUrl": "/materials/Introdução_ao_Help_Desk_1.pdf",
+      "fileType": "pdf",
+      "fileSize": "NULL",
+      "order": "1",
+      "createdAt": "2026-01-28 20:55:47",
+      "updatedAt": "2026-01-28 20:55:47"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcourseId\tlessonId\ttitle\tdescription\tfileUrl\tfileType\tfileSize\torder\tcreatedAt\tupdatedAt\n1\t1\t1\tFundamentos de Help Desk\tMaterial de referência sobre fundamentos\t/materials/Introdução_ao_Help_Desk_1.pdf\tpdf\tNULL\t1\t2026-01-28 20:55:47\t2026-01-28 20:55:47\n",
+  "stderr": "",
+  "execution_time_ms": 348
+}
