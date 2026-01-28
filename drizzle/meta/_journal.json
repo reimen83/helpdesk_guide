@@ -8,6 +8,13 @@
       "when": 1769570996316,
       "tag": "0000_cultured_epoch",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1769578859420,
+      "tag": "0001_milky_talos",
+      "breakpoints": true
     }
   ]
 }
