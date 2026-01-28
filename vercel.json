@@ -1,6 +1,15 @@
 {
-  "buildCommand": "",
-  "outputDirectory": ".",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
   "framework": null,
-  "installCommand": ""
+  "installCommand": "pnpm install",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
