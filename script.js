@@ -344,6 +344,40 @@ function downloadPDF(type) {
 }
 
 // ============================================
+// VALIDAÇÃO DE EMAIL E RATE LIMITING
+// ============================================
+
+// Regex para validação de email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Armazenar timestamps das últimas submissões (1 minuto = 60000ms)
+const submissionTimestamps = {
+  newsletter: 0,
+  contact: 0
+};
+
+const RATE_LIMIT_MS = 60000; // 1 minuto
+
+function isValidEmail(email) {
+  return emailRegex.test(email.trim());
+}
+
+function canSubmitForm(formType) {
+  const now = Date.now();
+  const lastSubmission = submissionTimestamps[formType] || 0;
+  const timeSinceLastSubmission = now - lastSubmission;
+  
+  if (timeSinceLastSubmission < RATE_LIMIT_MS) {
+    const secondsRemaining = Math.ceil((RATE_LIMIT_MS - timeSinceLastSubmission) / 1000);
+    showToast(`Aguarde ${secondsRemaining}s antes de enviar novamente.`, 'warning');
+    return false;
+  }
+  
+  submissionTimestamps[formType] = now;
+  return true;
+}
+
+// ============================================
 // TOAST NOTIFICATIONS
 // ============================================
 
@@ -391,10 +425,22 @@ function showToast(message, type = 'info', duration = 3000) {
 function handleNewsletterSubmit(event) {
   event.preventDefault();
   const form = event.target;
-  const email = form.querySelector('.newsletter-input').value;
+  const email = form.querySelector('.newsletter-input').value.trim();
   
+  // Validação de email vazio
   if (!email) {
-    showToast('Por favor, insira um email válido.', 'warning');
+    showToast('Por favor, insira um email.', 'warning');
+    return;
+  }
+  
+  // Validação de formato de email
+  if (!isValidEmail(email)) {
+    showToast('Por favor, insira um email válido (ex: seu@email.com).', 'warning');
+    return;
+  }
+  
+  // Rate limiting
+  if (!canSubmitForm('newsletter')) {
     return;
   }
   
@@ -431,13 +477,25 @@ function handleContactSubmit(event) {
   event.preventDefault();
   const form = event.target;
   
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value;
-  const message = document.getElementById('message').value;
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
   
+  // Validação de campos vazios
   if (!name || !email || !subject || !message) {
     showToast('Por favor, preencha todos os campos.', 'warning');
+    return;
+  }
+  
+  // Validação de formato de email
+  if (!isValidEmail(email)) {
+    showToast('Por favor, insira um email válido (ex: seu@email.com).', 'warning');
+    return;
+  }
+  
+  // Rate limiting
+  if (!canSubmitForm('contact')) {
     return;
   }
   
