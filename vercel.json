@@ -3,7 +3,6 @@
   "outputDirectory": "dist",
   "framework": null,
   "installCommand": "pnpm install --frozen-lockfile --shamefully-hoist",
-  "nodeVersion": "22.13.0",
   "env": {
     "NODE_ENV": "production",
     "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org"
