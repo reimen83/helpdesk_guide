@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import AIChat from "./pages/AIChat";
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/cursos/:courseId"} component={CourseDetails} />
       <Route path={"/login"} component={Login} />
       <Route path={"/perfil"} component={Profile} />
+      <Route path={"/ia-chat"} component={AIChat} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

@@ -53,12 +53,20 @@ export function Navbar() {
               Home
             </button>
             <button
-              onClick={() => setLocation("/courses")}
+              onClick={() => setLocation("/cursos")}
               className={`text-sm font-medium transition-colors ${
-                location === "/courses" ? "text-blue-600" : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                location === "/cursos" ? "text-blue-600" : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
               }`}
             >
               Cursos
+            </button>
+            <button
+              onClick={() => setLocation("/ia-chat")}
+              className={`text-sm font-medium transition-colors ${
+                location === "/ia-chat" ? "text-blue-600" : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+              }`}
+            >
+              Chat IA
             </button>
 
           </div>
