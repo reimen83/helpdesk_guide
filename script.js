@@ -357,7 +357,7 @@ function handleNewsletterSubmit(event) {
     return;
   }
   
-  fetch('https://formspree.io/f/xyzjpwqk', {
+  fetch('https://formspree.io/f/2917891660564135764', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -400,7 +400,7 @@ function handleContactSubmit(event) {
     return;
   }
   
-  fetch('https://formspree.io/f/xyzjpwqk', {
+  fetch('https://formspree.io/f/2917891660564135764', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
