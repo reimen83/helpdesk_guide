@@ -2,8 +2,10 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getLoginUrl } from "@/const";
-import { ArrowRight, BookOpen, Code, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Code, Users, Mail } from "lucide-react";
 import { useLocation } from "wouter";
+import { ContactForm } from "@/components/ContactForm";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -101,6 +103,33 @@ export default function Home() {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-20 px-4 bg-slate-100 dark:bg-slate-800">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="flex justify-center mb-4">
+            <Mail className="h-12 w-12 text-blue-600" />
+          </div>
+          <h2 className="text-3xl font-bold">Fique Atualizado</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Receba as últimas notícias, dicas e atualizações sobre Help Desk diretamente no seu email.
+          </p>
+          <NewsletterForm />
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 px-4 bg-white dark:bg-slate-900">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="text-center space-y-2">
+            <h2 className="text-3xl font-bold">Entre em Contato</h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Tem dúvidas ou sugestões? Envie uma mensagem para nós.
+            </p>
+          </div>
+          <ContactForm />
         </div>
       </section>
 
