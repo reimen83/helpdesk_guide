@@ -109,7 +109,6 @@ export default function Courses() {
                   <SelectValue placeholder="Todas as categorias" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todas as categorias</SelectItem>
                   {categories?.map((cat) => (
                     <SelectItem key={cat} value={cat}>
                       {cat}
@@ -126,7 +125,6 @@ export default function Courses() {
                   <SelectValue placeholder="Todos os níveis" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todos os níveis</SelectItem>
                   <SelectItem value="beginner">Iniciante</SelectItem>
                   <SelectItem value="intermediate">Intermediário</SelectItem>
                   <SelectItem value="advanced">Avançado</SelectItem>
@@ -201,8 +199,7 @@ export default function Courses() {
                     className="w-full"
                     disabled={
                       isEnrolled(course.id) ||
-                      enrollingCourseId === course.id ||
-                      !isAuthenticated
+                      enrollingCourseId === course.id
                     }
                     onClick={() => handleEnroll(course.id)}
                   >

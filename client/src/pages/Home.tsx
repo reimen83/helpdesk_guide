@@ -23,42 +23,22 @@ export default function Home() {
             Aprenda tudo sobre atendimento de chamados, gestão de SLA, manutenção de hardware e muito mais.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            {isAuthenticated ? (
-              <>
-                <Button
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700"
-                  onClick={() => setLocation("/courses")}
-                >
-                  Acessar Cursos
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => setLocation("/profile")}
-                >
-                  Meu Perfil
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700"
-                  onClick={() => (window.location.href = getLoginUrl())}
-                >
-                  Começar Agora
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => setLocation("/blog")}
-                >
-                  Explorar Blog
-                </Button>
-              </>
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700"
+              onClick={() => setLocation("/cursos")}
+            >
+              Acessar Cursos
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            {isAuthenticated && (
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => setLocation("/perfil")}
+              >
+                Meu Perfil
+              </Button>
             )}
           </div>
         </div>
