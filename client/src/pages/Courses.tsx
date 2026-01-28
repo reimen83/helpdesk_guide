@@ -7,11 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { BookOpen, Clock, Star, Loader2 } from "lucide-react";
+import { BookOpen, Clock, Star, Loader2, ArrowRight } from "lucide-react";
+import { useLocation } from "wouter";
 import { toast } from "sonner";
 
 export default function Courses() {
   const { isAuthenticated } = useAuth();
+  const [, setLocation] = useLocation();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedLevel, setSelectedLevel] = useState<string>("");
@@ -195,25 +197,31 @@ export default function Courses() {
                     </div>
                   )}
 
-                  <Button
-                    className="w-full"
-                    disabled={
-                      isEnrolled(course.id) ||
-                      enrollingCourseId === course.id
-                    }
-                    onClick={() => handleEnroll(course.id)}
-                  >
-                    {enrollingCourseId === course.id ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Inscrevendo...
-                      </>
-                    ) : isEnrolled(course.id) ? (
-                      "Já inscrito"
-                    ) : (
-                      "Inscrever-se"
-                    )}
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => setLocation(`/cursos/${course.id}`)}
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      className="flex-1"
+                      disabled={isEnrolled(course.id) || enrollingCourseId === course.id}
+                      onClick={() => handleEnroll(course.id)}
+                    >
+                      {enrollingCourseId === course.id ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Inscrevendo...
+                        </>
+                      ) : isEnrolled(course.id) ? (
+                        "Já inscrito"
+                      ) : (
+                        "Inscrever-se"
+                      )}
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))

@@ -15,6 +15,13 @@
       "when": 1769578859420,
       "tag": "0001_milky_talos",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1769633699829,
+      "tag": "0002_chunky_ben_grimm",
+      "breakpoints": true
     }
   ]
 }

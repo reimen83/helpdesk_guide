@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 
@@ -15,6 +16,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/cursos"} component={Courses} />
+      <Route path={"/cursos/:courseId"} component={CourseDetails} />
       <Route path={"/login"} component={Login} />
       <Route path={"/perfil"} component={Profile} />
       <Route path={"/404"} component={NotFound} />
@@ -29,6 +31,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider
         defaultTheme="light"
+        switchable
       >
         <TooltipProvider>
           <Navbar />
