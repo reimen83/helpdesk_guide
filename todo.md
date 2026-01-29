@@ -29,3 +29,7 @@
 - [x] Integrar link de Blog na Navbar
 - [x] Criar testes para funcionalidades de Blog
 - [x] Testar e validar Blog funcionando
+
+# Correções Mobile
+
+- [x] Corrigir navegação mobile - abas não aparecem em dispositivos pequenos
