@@ -68,6 +68,14 @@ export function Navbar() {
             >
               Chat IA
             </button>
+            <button
+              onClick={() => setLocation("/blog")}
+              className={`text-sm font-medium transition-colors ${
+                location === "/blog" ? "text-blue-600" : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+              }`}
+            >
+              Blog
+            </button>
 
           </div>
 

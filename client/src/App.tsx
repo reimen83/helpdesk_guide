@@ -11,6 +11,7 @@ import CourseDetails from "./pages/CourseDetails";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import AIChat from "./pages/AIChat";
+import Blog from "./pages/Blog";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/cursos"} component={Courses} />
       <Route path={"/cursos/:courseId"} component={CourseDetails} />
+      <Route path={"/blog"} component={Blog} />
       <Route path={"/login"} component={Login} />
       <Route path={"/perfil"} component={Profile} />
       <Route path={"/ia-chat"} component={AIChat} />

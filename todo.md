@@ -19,3 +19,13 @@
 # Bugs Reportados
 
 - [x] PDFs de materiais não estão abrindo ao fazer download
+
+# Implementação de Blog Dinâmico
+
+- [x] Criar tabela de posts de blog no banco de dados
+- [x] Implementar API para buscar notícias tech de RSS feeds
+- [x] Criar página de Blog com listagem de posts
+- [x] Adicionar filtros e busca na página de Blog
+- [x] Integrar link de Blog na Navbar
+- [x] Criar testes para funcionalidades de Blog
+- [x] Testar e validar Blog funcionando

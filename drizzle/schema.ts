@@ -120,3 +120,28 @@ export const lessonProgress = mysqlTable("lesson_progress", {
 
 export type LessonProgress = typeof lessonProgress.$inferSelect;
 export type InsertLessonProgress = typeof lessonProgress.$inferInsert;
+
+/**
+ * Blog Posts table
+ */
+export const blogPosts = mysqlTable("blog_posts", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  excerpt: text("excerpt"),
+  content: text("content"),
+  category: varchar("category", { length: 100 }),
+  tags: varchar("tags", { length: 500 }),
+  author: varchar("author", { length: 255 }),
+  thumbnail: varchar("thumbnail", { length: 500 }),
+  source: varchar("source", { length: 255 }),
+  sourceUrl: varchar("sourceUrl", { length: 500 }),
+  published: boolean("published").default(true),
+  views: int("views").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  publishedAt: timestamp("publishedAt"),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type InsertBlogPost = typeof blogPosts.$inferInsert;
