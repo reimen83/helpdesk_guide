@@ -60,8 +60,7 @@ export default function Blog() {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">Blog - Notícias Tech</h1>
           <p className="text-lg opacity-90">
-            Fique atualizado com as últimas notícias e tendências em Help Desk
-            e Suporte Técnico
+            Acompanhe as principais notícias e tendências do mundo tech
           </p>
         </div>
       </div>

@@ -33,3 +33,7 @@
 # Correções Mobile
 
 - [x] Corrigir navegação mobile - abas não aparecem em dispositivos pequenos
+
+# Alinhamento do Projeto - Hub de Tecnologia
+
+- [x] Atualizar texto da página de Blog para "Acompanhe as principais notícias e tendências do mundo tech"
