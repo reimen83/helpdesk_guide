@@ -37,3 +37,10 @@
 # Alinhamento do Projeto - Hub de Tecnologia
 
 - [x] Atualizar texto da página de Blog para "Acompanhe as principais notícias e tendências do mundo tech"
+
+# Integração com RSS Feeds
+
+- [x] Criar helpers para fetch de RSS Feeds (Dev.to e Hacker News)
+- [x] Criar router tRPC para sincronizar posts de RSS
+- [x] Implementar job agendado para atualizar posts periodicamente
+- [x] Testar integração e validar dados
