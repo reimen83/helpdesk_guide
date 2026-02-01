@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `blog_posts` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `title` varchar(255) NOT NULL,\n  `slug` varchar(255) NOT NULL UNIQUE,\n  `excerpt` text,\n  `content` text,\n  `category` varchar(100),\n  `tags` varchar(500),\n  `author` varchar(255),\n  `thumbnail` varchar(500),\n  `source` varchar(255),\n  `sourceUrl` varchar(500),\n  `published` boolean DEFAULT true,\n  `views` int DEFAULT 0,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `publishedAt` timestamp,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `blog_posts_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2F5rqD8cJ63W6KH.ff46c3c87d90 --database FEHVCygW4T5Ut9fR7hCHgq --execute CREATE TABLE IF NOT EXISTS `blog_posts` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `title` varchar(255) NOT NULL,\n  `slug` varchar(255) NOT NULL UNIQUE,\n  `excerpt` text,\n  `content` text,\n  `category` varchar(100),\n  `tags` varchar(500),\n  `author` varchar(255),\n  `thumbnail` varchar(500),\n  `source` varchar(255),\n  `sourceUrl` varchar(500),\n  `published` boolean DEFAULT true,\n  `views` int DEFAULT 0,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `publishedAt` timestamp,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `blog_posts_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 510
+}

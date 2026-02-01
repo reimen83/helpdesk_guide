@@ -44,3 +44,8 @@
 - [x] Criar router tRPC para sincronizar posts de RSS
 - [x] Implementar job agendado para atualizar posts periodicamente
 - [x] Testar integração e validar dados
+
+# Sincronização Automática de RSS
+
+- [x] Implementar sincronização automática de RSS feeds no servidor
+- [x] Testar e validar que notícias estão sendo populadas no blog
