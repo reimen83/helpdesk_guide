@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Início",
+    "courses": "Cursos",
+    "chat": "Chat IA",
+    "blog": "Blog",
+    "login": "Entrar",
+    "logout": "Sair"
+  },
+  "home": {
+    "title": "Guia Completo de Help Desk",
+    "subtitle": "Aprenda tudo sobre atendimento de chamados, gestão de SLA, manutenção de hardware e muito mais.",
+    "cta_courses": "Acessar Cursos",
+    "cta_profile": "Meu Perfil",
+    "why_choose": "Por que escolher Help Desk Guide?",
+    "feature_courses": "Cursos Completos",
+    "feature_courses_desc": "Conteúdo estruturado e atualizado sobre Help Desk e Suporte Técnico",
+    "feature_ai": "IA Generativa",
+    "feature_ai_desc": "Pesquisas rápidas e respostas inteligentes sem limites de consultas",
+    "feature_community": "Comunidade Ativa",
+    "feature_community_desc": "Conecte-se com profissionais de Help Desk e Suporte Técnico"
+  },
+  "blog": {
+    "title": "Blog - Notícias Tech",
+    "subtitle": "Acompanhe as principais notícias e tendências do mundo tech",
+    "search_placeholder": "Buscar posts...",
+    "all_categories": "Todos",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "no_posts": "Nenhum post encontrado",
+    "read_more": "Ler mais",
+    "source": "Fonte"
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Aprenda com cursos de qualidade sobre Help Desk e Suporte Técnico",
+    "enroll": "Inscrever-se",
+    "enrolled": "Inscrito",
+    "level": "Nível",
+    "duration": "Duração",
+    "lessons": "Aulas",
+    "free": "Gratuito",
+    "paid": "Pago"
+  },
+  "chat": {
+    "title": "Chat IA",
+    "subtitle": "Faça perguntas e obtenha respostas inteligentes",
+    "placeholder": "Digite sua pergunta...",
+    "send": "Enviar",
+    "loading": "Carregando...",
+    "error": "Erro ao processar sua pergunta"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "language": "Idioma",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

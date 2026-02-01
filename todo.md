@@ -49,3 +49,12 @@
 
 - [x] Implementar sincronização automática de RSS feeds no servidor
 - [x] Testar e validar que notícias estão sendo populadas no blog
+
+# Internacionalização e Tradução
+
+- [x] Criar sistema de i18n com suporte a PT-BR, EN e ES
+- [x] Traduzir todo conteúdo do site para português do Brasil
+- [x] Adicionar seletor de idiomas na interface (menu ou footer)
+- [x] Corrigir links dos feeds RSS para funcionarem corretamente
+- [x] Traduzir notícias RSS para português
+- [x] Testar seletor de idiomas e persistência de preferência

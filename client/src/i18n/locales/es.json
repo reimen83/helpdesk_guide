@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "courses": "Cursos",
+    "chat": "Chat IA",
+    "blog": "Blog",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión"
+  },
+  "home": {
+    "title": "Guía Completa de Help Desk",
+    "subtitle": "Aprende todo sobre manejo de tickets, gestión de SLA, mantenimiento de hardware y mucho más.",
+    "cta_courses": "Acceder a Cursos",
+    "cta_profile": "Mi Perfil",
+    "why_choose": "¿Por qué elegir Help Desk Guide?",
+    "feature_courses": "Cursos Completos",
+    "feature_courses_desc": "Contenido estructurado y actualizado sobre Help Desk y Soporte Técnico",
+    "feature_ai": "IA Generativa",
+    "feature_ai_desc": "Búsqueda rápida y respuestas inteligentes sin límites de consultas",
+    "feature_community": "Comunidad Activa",
+    "feature_community_desc": "Conéctate con profesionales de Help Desk y Soporte Técnico"
+  },
+  "blog": {
+    "title": "Blog - Noticias Tech",
+    "subtitle": "Sigue las últimas noticias y tendencias del mundo tech",
+    "search_placeholder": "Buscar posts...",
+    "all_categories": "Todos",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "no_posts": "No se encontraron posts",
+    "read_more": "Leer más",
+    "source": "Fuente"
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Aprende con cursos de calidad sobre Help Desk y Soporte Técnico",
+    "enroll": "Inscribirse",
+    "enrolled": "Inscrito",
+    "level": "Nivel",
+    "duration": "Duración",
+    "lessons": "Lecciones",
+    "free": "Gratis",
+    "paid": "Pagado"
+  },
+  "chat": {
+    "title": "Chat IA",
+    "subtitle": "Haz preguntas y obtén respuestas inteligentes",
+    "placeholder": "Escribe tu pregunta...",
+    "send": "Enviar",
+    "loading": "Cargando...",
+    "error": "Error al procesar tu pregunta"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "language": "Idioma",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

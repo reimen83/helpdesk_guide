@@ -13,6 +13,7 @@ import { getLoginUrl } from "@/const";
 import { LogOut, Moon, Sun, User, Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -76,6 +77,9 @@ export function Navbar() {
 
           {/* Right Side */}
           <div className="flex items-center gap-2 sm:gap-4">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+
             {/* Theme Toggle */}
             <Button
               variant="ghost"

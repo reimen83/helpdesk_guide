@@ -2,6 +2,7 @@ import { parseStringPromise } from "xml2js";
 import { getDb } from "./db";
 import { blogPosts } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
+import { invokeLLM } from "./_core/llm";
 
 interface RSSItem {
   title: string[];
@@ -24,6 +25,37 @@ interface RSSFeed {
 }
 
 /**
+ * Translate text to Portuguese using LLM
+ */
+async function translateToPT(text: string): Promise<string> {
+  try {
+    if (!text || text.length < 5) return text;
+    
+    const response = await invokeLLM({
+      messages: [
+        {
+          role: "system",
+          content: "Você é um tradutor. Traduza o texto para português do Brasil de forma concisa. Responda APENAS com o texto traduzido, sem explicações.",
+        },
+        {
+          role: "user",
+          content: text.substring(0, 500),
+        },
+      ],
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (typeof content === 'string') {
+      return content;
+    }
+    return text;
+  } catch (error) {
+    console.warn("Erro ao traduzir:", error);
+    return text;
+  }
+}
+
+/**
  * Fetch and parse Dev.to RSS feed
  */
 export async function fetchDevToFeed(): Promise<
@@ -39,6 +71,8 @@ export async function fetchDevToFeed(): Promise<
 > {
   try {
     const response = await fetch("https://dev.to/feed");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
     const xml = await response.text();
     const parsed = (await parseStringPromise(xml)) as RSSFeed;
 
@@ -51,9 +85,13 @@ export async function fetchDevToFeed(): Promise<
             .filter(Boolean)
         : [];
 
+      const link = item.link?.[0] || "";
+      // Ensure link is valid URL
+      const validLink = link.startsWith("http") ? link : `https://dev.to${link}`;
+
       return {
         title: item.title?.[0] || "Sem título",
-        link: item.link?.[0] || "",
+        link: validLink,
         description: stripHtml(item.description?.[0] || ""),
         pubDate: new Date(item.pubDate?.[0] || new Date()),
         author: item.author?.[0] || "Dev.to",
@@ -83,6 +121,8 @@ export async function fetchHackerNewsFeed(): Promise<
 > {
   try {
     const response = await fetch("https://news.ycombinator.com/rss");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
     const xml = await response.text();
     const parsed = (await parseStringPromise(xml)) as RSSFeed;
 
@@ -91,10 +131,12 @@ export async function fetchHackerNewsFeed(): Promise<
     return items.slice(0, 30).map((item) => {
       const link = item.link?.[0] || "";
       const title = item.title?.[0] || "Sem título";
+      // Ensure link is valid URL
+      const validLink = link.startsWith("http") ? link : `https://news.ycombinator.com${link}`;
 
       return {
         title: title,
-        link: link,
+        link: validLink,
         description: item.description?.[0] || "Notícia do Hacker News",
         pubDate: new Date(item.pubDate?.[0] || new Date()),
         author: "Hacker News",

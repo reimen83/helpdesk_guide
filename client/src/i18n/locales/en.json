@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "chat": "AI Chat",
+    "blog": "Blog",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Complete Help Desk Guide",
+    "subtitle": "Learn everything about ticket handling, SLA management, hardware maintenance and much more.",
+    "cta_courses": "Access Courses",
+    "cta_profile": "My Profile",
+    "why_choose": "Why choose Help Desk Guide?",
+    "feature_courses": "Complete Courses",
+    "feature_courses_desc": "Structured and updated content about Help Desk and Technical Support",
+    "feature_ai": "Generative AI",
+    "feature_ai_desc": "Fast research and intelligent answers without query limits",
+    "feature_community": "Active Community",
+    "feature_community_desc": "Connect with Help Desk and Technical Support professionals"
+  },
+  "blog": {
+    "title": "Blog - Tech News",
+    "subtitle": "Follow the latest news and trends in the tech world",
+    "search_placeholder": "Search posts...",
+    "all_categories": "All",
+    "next": "Next",
+    "previous": "Previous",
+    "no_posts": "No posts found",
+    "read_more": "Read more",
+    "source": "Source"
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Learn with quality courses about Help Desk and Technical Support",
+    "enroll": "Enroll",
+    "enrolled": "Enrolled",
+    "level": "Level",
+    "duration": "Duration",
+    "lessons": "Lessons",
+    "free": "Free",
+    "paid": "Paid"
+  },
+  "chat": {
+    "title": "AI Chat",
+    "subtitle": "Ask questions and get intelligent answers",
+    "placeholder": "Type your question...",
+    "send": "Send",
+    "loading": "Loading...",
+    "error": "Error processing your question"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "language": "Language",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español"
+  }
+}
