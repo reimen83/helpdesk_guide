@@ -1,0 +1,20 @@
+{
+  "query": "SELECT title, excerpt, sourceUrl FROM blog_posts LIMIT 3;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2F5rqD8cJ63W6KH.ff46c3c87d90 --database FEHVCygW4T5Ut9fR7hCHgq --execute SELECT title, excerpt, sourceUrl FROM blog_posts LIMIT 3;",
+  "rows": [],
+  "messages": [
+    "Superando o Geo-Bloqueio em Recursos Corporativos com Estratégias TypeScript\tSuperando o Bloqueio Geográfico em Recursos Corporativos com Estratégias TypeScript",
+    "No universo do software empresarial, implementar recursos com restrição geográfica apresenta desafios significativo\thttps://dev.to/mohammad_waseem_c31f3a26f/overcoming-geo-blocking-in-enterprise-features-with-typescript-strategies-6ho",
+    "Além de Simples Mostruários: Um Portfólio Acessível e com IA\tEsta é uma submissão para o Desafio de Portfólio Ano Novo, Você Novo, apresentado pela Google AI.",
+    "Sobre Mim",
+    "Olá! Sou Safvan, um Desenvolvedor Full Stack que acredita que \"chamativo\" não deve signifi\thttps://dev.to/safvantsy/beyond-simple-showcases-an-accessible-ai-powered-portfolio-cf5",
+    "Sua primeira API gRPC em Node.js\tConverter API Rest para gRPC",
+    "Por que usar gRPC?",
+    "gRPC é um framework RPC universal de alto desempenho e código aberto, que roda nativamente em microsserviços e arquiteturas serverless.",
+    "Exemplo",
+    "API \thttps://dev.to/cheulong/your-first-grpc-api-in-nodejs-1nke"
+  ],
+  "stdout": "title\texcerpt\tsourceUrl\nSuperando o Geo-Bloqueio em Recursos Corporativos com Estratégias TypeScript\tSuperando o Bloqueio Geográfico em Recursos Corporativos com Estratégias TypeScript\n\nNo universo do software empresarial, implementar recursos com restrição geográfica apresenta desafios significativo\thttps://dev.to/mohammad_waseem_c31f3a26f/overcoming-geo-blocking-in-enterprise-features-with-typescript-strategies-6ho\nAlém de Simples Mostruários: Um Portfólio Acessível e com IA\tEsta é uma submissão para o Desafio de Portfólio Ano Novo, Você Novo, apresentado pela Google AI.\n\nSobre Mim\n\nOlá! Sou Safvan, um Desenvolvedor Full Stack que acredita que \"chamativo\" não deve signifi\thttps://dev.to/safvantsy/beyond-simple-showcases-an-accessible-ai-powered-portfolio-cf5\nSua primeira API gRPC em Node.js\tConverter API Rest para gRPC\n\nPor que usar gRPC?\n\ngRPC é um framework RPC universal de alto desempenho e código aberto, que roda nativamente em microsserviços e arquiteturas serverless.\n\nExemplo\n\nAPI \thttps://dev.to/cheulong/your-first-grpc-api-in-nodejs-1nke\n",
+  "stderr": "",
+  "execution_time_ms": 351
+}

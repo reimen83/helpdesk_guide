@@ -35,18 +35,18 @@ async function translateToPT(text: string): Promise<string> {
       messages: [
         {
           role: "system",
-          content: "Você é um tradutor. Traduza o texto para português do Brasil de forma concisa. Responda APENAS com o texto traduzido, sem explicações.",
+          content: "Você é um tradutor profissional. Traduza o texto para português do Brasil de forma concisa e natural. Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais.",
         },
         {
           role: "user",
-          content: text.substring(0, 500),
+          content: text.substring(0, 300),
         },
       ],
     });
 
     const content = response.choices[0]?.message?.content;
     if (typeof content === 'string') {
-      return content;
+      return content.trim();
     }
     return text;
   } catch (error) {
@@ -185,7 +185,7 @@ function generateSlug(title: string): string {
 }
 
 /**
- * Sync RSS feeds to database
+ * Sync RSS feeds to database with Portuguese translation
  */
 export async function syncRSSFeeds(): Promise<{
   devTo: number;
@@ -205,8 +205,6 @@ export async function syncRSSFeeds(): Promise<{
     // Fetch Dev.to posts
     const devToPosts = await fetchDevToFeed();
     for (const post of devToPosts) {
-      const slug = generateSlug(post.title);
-
       // Check if post already exists
       const existing = await db
         .select()
@@ -215,11 +213,16 @@ export async function syncRSSFeeds(): Promise<{
         .limit(1);
 
       if (existing.length === 0) {
+        // Translate title and description to Portuguese
+        const translatedTitle = await translateToPT(post.title);
+        const translatedDescription = await translateToPT(post.description);
+        const slug = generateSlug(translatedTitle);
+
         await db.insert(blogPosts).values({
-          title: post.title,
+          title: translatedTitle,
           slug: slug,
-          excerpt: post.description.substring(0, 200),
-          content: post.description,
+          excerpt: translatedDescription.substring(0, 200),
+          content: translatedDescription,
           category: post.category,
           author: post.author,
           thumbnail: post.thumbnail,
@@ -235,8 +238,6 @@ export async function syncRSSFeeds(): Promise<{
     // Fetch Hacker News posts
     const hackerNewsPosts = await fetchHackerNewsFeed();
     for (const post of hackerNewsPosts) {
-      const slug = generateSlug(post.title);
-
       // Check if post already exists
       const existing = await db
         .select()
@@ -245,14 +246,19 @@ export async function syncRSSFeeds(): Promise<{
         .limit(1);
 
       if (existing.length === 0) {
+        // Translate title and description to Portuguese
+        const translatedTitle = await translateToPT(post.title);
+        const translatedDescription = await translateToPT(post.description);
+        const slug = generateSlug(translatedTitle);
+
         await db.insert(blogPosts).values({
-          title: post.title,
+          title: translatedTitle,
           slug: slug,
-          excerpt: post.description.substring(0, 200),
-          content: post.description,
-          category: post.category,
-          author: post.author,
-          thumbnail: post.thumbnail,
+          excerpt: translatedDescription.substring(0, 200),
+          content: translatedDescription,
+          category: "Notícias",
+          author: "Hacker News",
+          thumbnail: undefined,
           publishedAt: post.pubDate,
           views: 0,
           source: "Hacker News",
@@ -261,10 +267,6 @@ export async function syncRSSFeeds(): Promise<{
         hackerNewsCount++;
       }
     }
-
-    console.log(
-      `RSS Sync: ${devToCount} posts from Dev.to, ${hackerNewsCount} posts from Hacker News`
-    );
 
     return {
       devTo: devToCount,

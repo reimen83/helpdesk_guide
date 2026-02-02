@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM blog_posts WHERE source IN ('Dev.to', 'Hacker News');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2F5rqD8cJ63W6KH.ff46c3c87d90 --database FEHVCygW4T5Ut9fR7hCHgq --execute DELETE FROM blog_posts WHERE source IN ('Dev.to', 'Hacker News');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 378
+}

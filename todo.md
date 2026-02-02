@@ -58,3 +58,10 @@
 - [x] Corrigir links dos feeds RSS para funcionarem corretamente
 - [x] Traduzir notícias RSS para português
 - [x] Testar seletor de idiomas e persistência de preferência
+
+# Correção de Feeds RSS e Tradução
+
+- [x] Debugar e corrigir sincronização de feeds RSS
+- [x] Traduzir títulos e descrições dos posts para português
+- [x] Testar links dos posts e validar funcionamento
+- [x] Criar página de detalhes do blog com links para fonte original
