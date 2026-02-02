@@ -18,7 +18,14 @@
     "feature_ai": "IA Generativa",
     "feature_ai_desc": "Pesquisas rápidas e respostas inteligentes sem limites de consultas",
     "feature_community": "Comunidade Ativa",
-    "feature_community_desc": "Conecte-se com profissionais de Help Desk e Suporte Técnico"
+    "feature_community_desc": "Conecte-se com profissionais de Help Desk e Suporte Técnico",
+    "newsletter_title": "Fique Atualizado",
+    "newsletter_subtitle": "Receba as últimas notícias, dicas e atualizações sobre Help Desk diretamente no seu email.",
+    "contact_title": "Entre em Contato",
+    "contact_subtitle": "Tem dúvidas ou sugestões? Envie uma mensagem para nós.",
+    "cta_title": "Pronto para começar sua jornada?",
+    "cta_subtitle": "Junte-se a milhares de profissionais que já estão aprendendo com Help Desk Guide.",
+    "cta_signup": "Criar Conta Grátis"
   },
   "blog": {
     "title": "Blog - Notícias Tech",

@@ -65,3 +65,8 @@
 - [x] Traduzir títulos e descrições dos posts para português
 - [x] Testar links dos posts e validar funcionamento
 - [x] Criar página de detalhes do blog com links para fonte original
+
+# Correção do Sistema de Tradução (i18n)
+
+- [x] Debugar e corrigir seletor de idiomas
+- [x] Testar mudança de idioma em todas as páginas

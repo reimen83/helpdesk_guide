@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getLoginUrl } from "@/const";
@@ -10,6 +11,7 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
@@ -17,10 +19,10 @@ export default function Home() {
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-6">
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Guia Completo de Help Desk
+            {t("home.title")}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Aprenda tudo sobre atendimento de chamados, gestão de SLA, manutenção de hardware e muito mais.
+            {t("home.subtitle")}
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button
@@ -28,7 +30,7 @@ export default function Home() {
               className="bg-blue-600 hover:bg-blue-700"
               onClick={() => setLocation("/cursos")}
             >
-              Acessar Cursos
+              {t("home.cta_courses")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             {isAuthenticated && (
@@ -37,7 +39,7 @@ export default function Home() {
                 variant="outline"
                 onClick={() => setLocation("/perfil")}
               >
-                Meu Perfil
+                {t("home.cta_profile")}
               </Button>
             )}
           </div>
@@ -47,38 +49,38 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-20 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Por que escolher Help Desk Guide?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">{t("home.why_choose")}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card>
               <CardHeader>
                 <BookOpen className="h-8 w-8 text-blue-600 mb-2" />
-                <CardTitle>Cursos Completos</CardTitle>
+                <CardTitle>{t("home.feature_courses")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Conteúdo estruturado e atualizado sobre Help Desk, SLA, Hardware e Infraestrutura.
+                  {t("home.feature_courses_desc")}
                 </CardDescription>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
                 <Code className="h-8 w-8 text-purple-600 mb-2" />
-                <CardTitle>IA Generativa</CardTitle>
+                <CardTitle>{t("home.feature_ai")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Pesquisas rápidas e respostas inteligentes sem sair da plataforma.
+                  {t("home.feature_ai_desc")}
                 </CardDescription>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
                 <Users className="h-8 w-8 text-green-600 mb-2" />
-                <CardTitle>Comunidade Ativa</CardTitle>
+                <CardTitle>{t("home.feature_community")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Conecte-se com profissionais de Help Desk e compartilhe experiências.
+                  {t("home.feature_community_desc")}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -92,9 +94,9 @@ export default function Home() {
           <div className="flex justify-center mb-4">
             <Mail className="h-12 w-12 text-blue-600" />
           </div>
-          <h2 className="text-3xl font-bold">Fique Atualizado</h2>
+          <h2 className="text-3xl font-bold">{t("home.newsletter_title")}</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Receba as últimas notícias, dicas e atualizações sobre Help Desk diretamente no seu email.
+            {t("home.newsletter_subtitle")}
           </p>
           <NewsletterForm />
         </div>
@@ -104,9 +106,9 @@ export default function Home() {
       <section className="py-20 px-4 bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="text-center space-y-2">
-            <h2 className="text-3xl font-bold">Entre em Contato</h2>
+            <h2 className="text-3xl font-bold">{t("home.contact_title")}</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Tem dúvidas ou sugestões? Envie uma mensagem para nós.
+              {t("home.contact_subtitle")}
             </p>
           </div>
           <ContactForm />
@@ -117,16 +119,16 @@ export default function Home() {
       {!isAuthenticated && (
         <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
           <div className="max-w-4xl mx-auto text-center text-white space-y-6">
-            <h2 className="text-3xl font-bold">Pronto para começar sua jornada?</h2>
+            <h2 className="text-3xl font-bold">{t("home.cta_title")}</h2>
             <p className="text-lg opacity-90">
-              Junte-se a milhares de profissionais que já estão aprendendo com Help Desk Guide.
+              {t("home.cta_subtitle")}
             </p>
             <Button
               size="lg"
               className="bg-white text-blue-600 hover:bg-gray-100"
               onClick={() => (window.location.href = getLoginUrl())}
             >
-              Criar Conta Grátis
+              {t("home.cta_signup")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
