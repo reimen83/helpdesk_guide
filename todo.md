@@ -83,3 +83,10 @@
 - [x] Ampliar prompt da IA para ser mais generativa com insights
 - [x] Adicionar sugestões de tópicos relacionados na UI
 - [x] Testar histórico persistente e interação generativa
+
+# Histórico de Conversas do Chat
+
+- [x] Criar API tRPC para listar conversas do usuário
+- [x] Implementar sidebar com lista de conversas
+- [x] Adicionar funcionalidade de carregar conversa anterior
+- [x] Testar histórico de conversas funcionando

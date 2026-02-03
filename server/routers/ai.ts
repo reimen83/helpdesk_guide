@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { invokeLLM } from "../_core/llm";
-import { saveChatMessage, getChatHistory } from "../db";
+import { saveChatMessage, getChatHistory, getDb } from "../db";
 import { nanoid } from "nanoid";
+import { chatHistory } from "../../drizzle/schema";
+import { desc, eq } from "drizzle-orm";
 
 export const aiRouter = router({
   chat: publicProcedure
@@ -135,4 +137,29 @@ Responda de forma clara, concisa e útil. Sempre que possível, forneça exemplo
         return [];
       }
     }),
+
+  // Endpoint para listar todas as conversas do usuário
+  listConversations: protectedProcedure.query(async ({ ctx }) => {
+    try {
+      const db = await getDb();
+      if (!db) throw new Error("Banco de dados não disponível");
+
+      // Buscar conversas únicas do usuário, ordenadas pela última mensagem
+      const conversations = await db
+        .selectDistinct({
+          conversationId: chatHistory.conversationId,
+          topic: chatHistory.topic,
+          createdAt: chatHistory.createdAt,
+        })
+        .from(chatHistory)
+        .where(eq(chatHistory.userId, ctx.user.id))
+        .orderBy(desc(chatHistory.createdAt))
+        .limit(50);
+
+      return conversations;
+    } catch (error) {
+      console.error("Erro ao listar conversas:", error);
+      return [];
+    }
+  }),
 });
