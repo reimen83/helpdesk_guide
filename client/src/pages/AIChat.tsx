@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Send, MessageCircle, Sparkles, Lightbulb, History, Plus, Trash2 } from "lucide-react";
+import { Loader2, Send, MessageCircle, Sparkles, Lightbulb, History, Plus, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 
@@ -13,6 +13,7 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
+  imageUrl?: string;
 }
 
 interface RelatedTopic {
@@ -34,7 +35,7 @@ export default function AIChat() {
     {
       id: "1",
       role: "assistant",
-      content: "Olá! Sou seu assistente de IA. Posso ajudá-lo com qualquer assunto - desde tecnologia, negócios, educação, criatividade, e muito mais. Faça suas perguntas e vou fazer o meu melhor para ajudar com insights e recomendações. Como posso começar?",
+      content: "Olá! Sou seu assistente de IA. Posso ajudá-lo com qualquer assunto - desde tecnologia, negócios, educação, criatividade, e muito mais. Faça suas perguntas e vou fazer o meu melhor para ajudar com insights e recomendações. Também posso gerar imagens gratuitamente! Como posso começar?",
       timestamp: new Date(),
     },
   ]);
@@ -43,6 +44,7 @@ export default function AIChat() {
   const [relatedTopics, setRelatedTopics] = useState<RelatedTopic[]>([]);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [isLoadingConversations, setIsLoadingConversations] = useState(false);
+  const [isImageMode, setIsImageMode] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Gerar conversation ID ao montar
@@ -106,16 +108,34 @@ export default function AIChat() {
     },
   });
 
+  const generateImageMutation = trpc.ai.generateImage.useMutation({
+    onSuccess: (response: any) => {
+      const newMessage: Message = {
+        id: Date.now().toString(),
+        role: "assistant",
+        content: `Imagem gerada: ${response.prompt}`,
+        timestamp: new Date(),
+        imageUrl: response.url,
+      };
+      setMessages((prev) => [...prev, newMessage]);
+      setIsLoading(false);
+      setIsImageMode(false);
+      toast.success("Imagem gerada com sucesso!");
+    },
+    onError: (error: any) => {
+      toast.error(error.message || "Erro ao gerar imagem");
+      setIsLoading(false);
+    },
+  });
+
   const getHistoryQuery = trpc.ai.getHistory.useQuery(
     { conversationId },
     { enabled: !!conversationId && isAuthenticated }
   );
 
   const extractRelatedTopics = (text: string) => {
-    // Simples extração de tópicos relacionados baseada em padrões
     const topics: RelatedTopic[] = [];
 
-    // Padrões comuns de sugestões
     if (text.includes("também")) {
       topics.push({
         title: "Explorar conceitos relacionados",
@@ -161,12 +181,20 @@ export default function AIChat() {
     setInput("");
     setIsLoading(true);
 
-    // Send to AI
-    aiChatMutation.mutate({
-      message: input,
-      conversationId,
-      context: "general",
-    });
+    if (isImageMode) {
+      // Gerar imagem
+      generateImageMutation.mutate({
+        prompt: input,
+        conversationId,
+      });
+    } else {
+      // Chat normal
+      aiChatMutation.mutate({
+        message: input,
+        conversationId,
+        context: "general",
+      });
+    }
   };
 
   const handleTopicClick = (topic: string) => {
@@ -207,11 +235,12 @@ export default function AIChat() {
       {
         id: "1",
         role: "assistant",
-        content: "Olá! Sou seu assistente de IA. Posso ajudá-lo com qualquer assunto - desde tecnologia, negócios, educação, criatividade, e muito mais. Faça suas perguntas e vou fazer o meu melhor para ajudar com insights e recomendações. Como posso começar?",
+        content: "Olá! Sou seu assistente de IA. Posso ajudá-lo com qualquer assunto - desde tecnologia, negócios, educação, criatividade, e muito mais. Faça suas perguntas e vou fazer o meu melhor para ajudar com insights e recomendações. Também posso gerar imagens gratuitamente! Como posso começar?",
         timestamp: new Date(),
       },
     ]);
     setRelatedTopics([]);
+    setIsImageMode(false);
     loadConversations();
   };
 
@@ -226,7 +255,7 @@ export default function AIChat() {
             <div>
               <h1 className="text-3xl font-bold">Assistente de IA</h1>
               <p className="text-gray-600 dark:text-gray-400">
-                Seu consultor generativo para qualquer assunto
+                Seu consultor generativo para qualquer assunto + Geração de Imagens
               </p>
             </div>
           </div>
@@ -307,13 +336,24 @@ export default function AIChat() {
                     className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                      className={`max-w-xs lg:max-w-md ${
                         message.role === "user"
                           ? "bg-blue-600 text-white rounded-br-none"
                           : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-bl-none"
-                      }`}
+                      } px-4 py-2 rounded-lg`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                      {message.imageUrl ? (
+                        <div className="space-y-2">
+                          <img
+                            src={message.imageUrl}
+                            alt={message.content}
+                            className="max-w-sm rounded-lg"
+                          />
+                          <p className="text-sm">{message.content}</p>
+                        </div>
+                      ) : (
+                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                      )}
                       <p
                         className={`text-xs mt-1 ${
                           message.role === "user"
@@ -340,7 +380,7 @@ export default function AIChat() {
                 <div ref={messagesEndRef} />
               </CardContent>
 
-              <div className="border-t p-4">
+              <div className="border-t p-4 space-y-2">
                 {!isAuthenticated ? (
                   <Button
                     onClick={() => setLocation("/login")}
@@ -349,26 +389,43 @@ export default function AIChat() {
                     Faça login para usar o chat
                   </Button>
                 ) : (
-                  <form onSubmit={handleSendMessage} className="flex gap-2">
-                    <Input
-                      placeholder="Digite sua pergunta..."
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      disabled={isLoading}
-                      className="flex-1"
-                    />
-                    <Button
-                      type="submit"
-                      disabled={isLoading || !input.trim()}
-                      size="icon"
-                    >
-                      {isLoading ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Send className="h-4 w-4" />
-                      )}
-                    </Button>
-                  </form>
+                  <>
+                    <div className="flex gap-2">
+                      <Button
+                        variant={isImageMode ? "default" : "outline"}
+                        onClick={() => setIsImageMode(!isImageMode)}
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <ImageIcon className="h-4 w-4" />
+                        {isImageMode ? "Modo Imagem" : "Gerar Imagem"}
+                      </Button>
+                    </div>
+                    <form onSubmit={handleSendMessage} className="flex gap-2">
+                      <Input
+                        placeholder={
+                          isImageMode
+                            ? "Descreva a imagem que deseja gerar..."
+                            : "Digite sua pergunta..."
+                        }
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        disabled={isLoading}
+                        className="flex-1"
+                      />
+                      <Button
+                        type="submit"
+                        disabled={isLoading || !input.trim()}
+                        size="icon"
+                      >
+                        {isLoading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Send className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </form>
+                  </>
                 )}
               </div>
             </Card>
@@ -405,7 +462,7 @@ export default function AIChat() {
             {/* Exemplos de Perguntas */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Exemplos de Perguntas</CardTitle>
+                <CardTitle className="text-lg">Exemplos</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm">
                 <button
@@ -421,10 +478,10 @@ export default function AIChat() {
                   • Qual é a melhor estratégia de marketing?
                 </button>
                 <button
-                  onClick={() => handleTopicClick("Como melhorar minha produtividade?")}
+                  onClick={() => handleTopicClick("Gerar uma imagem de um gato futurista")}
                   className="block w-full text-left hover:text-blue-600 dark:hover:text-blue-400"
                 >
-                  • Como melhorar minha produtividade?
+                  • Gerar uma imagem de um gato futurista
                 </button>
                 <button
                   onClick={() => handleTopicClick("Explique um conceito de física")}
@@ -442,7 +499,7 @@ export default function AIChat() {
               </CardHeader>
               <CardContent className="space-y-2 text-sm">
                 <p>• Respostas instantâneas</p>
-                <p>• Baseado em IA generativa avançada</p>
+                <p>• Geração de imagens grátis</p>
                 <p>• Suporta qualquer assunto</p>
                 <p>• Histórico persistente</p>
                 <p>• Insights e recomendações</p>

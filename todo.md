@@ -90,3 +90,9 @@
 - [x] Implementar sidebar com lista de conversas
 - [x] Adicionar funcionalidade de carregar conversa anterior
 - [x] Testar histórico de conversas funcionando
+
+# Geração de Imagens no Chat IA
+
+- [x] Implementar endpoint tRPC para geração de imagens
+- [x] Adicionar UI para solicitar geração de imagens no chat
+- [x] Testar geração de imagens funcionando

@@ -162,4 +162,47 @@ Responda de forma clara, concisa e útil. Sempre que possível, forneça exemplo
       return [];
     }
   }),
+
+  // Endpoint para gerar imagens
+  generateImage: protectedProcedure
+    .input(
+      z.object({
+        prompt: z.string().min(10, "Descrição deve ter pelo menos 10 caracteres"),
+        conversationId: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const { generateImage } = await import("../_core/imageGeneration");
+
+        // Gerar imagem usando o helper
+        const result = await generateImage({
+          prompt: input.prompt,
+        });
+
+        // Salvar referência da imagem no histórico de chat se conversationId fornecido
+        if (input.conversationId && ctx.user?.id) {
+          try {
+            const topic = input.prompt.substring(0, 100);
+            await saveChatMessage({
+              userId: ctx.user.id,
+              conversationId: input.conversationId,
+              role: "assistant",
+              content: `[Imagem gerada: ${input.prompt}]\n\n${result.url}`,
+              topic,
+            });
+          } catch (dbError) {
+            console.error("Erro ao salvar imagem no histórico:", dbError);
+          }
+        }
+
+        return {
+          url: result.url,
+          prompt: input.prompt,
+        };
+      } catch (error) {
+        console.error("Erro ao gerar imagem:", error);
+        throw new Error("Erro ao gerar imagem. Tente novamente com uma descrição diferente.");
+      }
+    }),
 });
