@@ -1,38 +1,74 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { invokeLLM } from "../_core/llm";
+import { saveChatMessage, getChatHistory } from "../db";
+import { nanoid } from "nanoid";
 
 export const aiRouter = router({
   chat: publicProcedure
     .input(
       z.object({
         message: z.string().min(1, "Mensagem não pode estar vazia"),
+        conversationId: z.string().optional(),
         context: z.string().optional().default("general"),
       })
     )
-    .mutation(async ({ input }) => {
-      const systemPrompt = `Você é um assistente IA inteligente e versátil. Você pode ajudar com qualquer assunto, responder perguntas, fornecer informações, dar conselhos, resolver problemas e muito mais.
+    .mutation(async ({ input, ctx }) => {
+      const conversationId = input.conversationId || nanoid();
+      const userId = ctx.user?.id || 0;
+
+      const systemPrompt = `Você é um assistente IA inteligente, generativo e versátil. Você pode ajudar com qualquer assunto, responder perguntas, fornecer informações, dar conselhos, resolver problemas e muito mais.
 
 Você é:
 - Conhecedor em múltiplos domínios (tecnologia, negócios, educação, saúde, criatividade, etc.)
 - Sempre útil, honesto e respeitoso
 - Capaz de adaptar seu tom e estilo de comunicação conforme necessário
 - Pronto para ajudar com qualquer pergunta ou tarefa
+- Generativo: você não apenas responde, mas também oferece insights, recomendações, sugestões de tópicos relacionados e novas perspectivas
+
+Quando responder:
+1. Forneça uma resposta completa e informativa
+2. Ofereça insights adicionais ou perspectivas que o usuário pode não ter considerado
+3. Sugira tópicos relacionados que poderiam ser interessantes explorar
+4. Recomende recursos, ferramentas ou próximos passos práticos
+5. Se apropriado, faça perguntas de acompanhamento para aprofundar o entendimento
 
 Responda de forma clara, concisa e útil. Sempre que possível, forneça exemplos práticos e informações relevantes.`;
 
       try {
+        // Recuperar histórico de chat se o usuário estiver autenticado
+        let chatMessages: any[] = [];
+        if (userId > 0) {
+          chatMessages = await getChatHistory(userId, conversationId);
+        }
+
+        // Construir array de mensagens com histórico
+        const messages: any[] = [
+          {
+            role: "system",
+            content: systemPrompt,
+          },
+        ];
+
+        // Adicionar histórico de chat (últimas 5 mensagens)
+        if (chatMessages.length > 0) {
+          const recentMessages = chatMessages.slice(-10);
+          recentMessages.forEach((msg) => {
+            messages.push({
+              role: msg.role,
+              content: msg.content,
+            });
+          });
+        }
+
+        // Adicionar mensagem atual
+        messages.push({
+          role: "user",
+          content: input.message,
+        });
+
         const response = await invokeLLM({
-          messages: [
-            {
-              role: "system",
-              content: systemPrompt,
-            },
-            {
-              role: "user",
-              content: input.message,
-            },
-          ],
+          messages,
         });
 
         const messageContent = response.choices[0]?.message?.content;
@@ -41,12 +77,62 @@ Responda de forma clara, concisa e útil. Sempre que possível, forneça exemplo
           throw new Error("Nenhuma resposta recebida da IA");
         }
 
+        const responseText =
+          typeof messageContent === "string" ? messageContent : String(messageContent);
+
+        // Salvar mensagens no histórico se o usuário estiver autenticado
+        if (userId > 0) {
+          try {
+            // Extrair tópico da mensagem (primeiras palavras)
+            const topic = input.message.substring(0, 100);
+
+            // Salvar mensagem do usuário
+            await saveChatMessage({
+              userId,
+              conversationId,
+              role: "user",
+              content: input.message,
+              topic,
+            });
+
+            // Salvar resposta da IA
+            await saveChatMessage({
+              userId,
+              conversationId,
+              role: "assistant",
+              content: responseText,
+              topic,
+            });
+          } catch (dbError) {
+            console.error("Erro ao salvar histórico de chat:", dbError);
+            // Não falhar a resposta se o histórico não for salvo
+          }
+        }
+
         return {
-          message: typeof messageContent === "string" ? messageContent : String(messageContent),
+          message: responseText,
+          conversationId,
         };
       } catch (error) {
         console.error("Erro ao chamar LLM:", error);
         throw new Error("Erro ao processar sua mensagem. Tente novamente.");
+      }
+    }),
+
+  // Endpoint para recuperar histórico de chat
+  getHistory: protectedProcedure
+    .input(
+      z.object({
+        conversationId: z.string(),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      try {
+        const messages = await getChatHistory(ctx.user.id, input.conversationId);
+        return messages;
+      } catch (error) {
+        console.error("Erro ao recuperar histórico:", error);
+        return [];
       }
     }),
 });

@@ -75,3 +75,11 @@
 
 - [x] Remover restrições de conteúdo do Chat IA
 - [x] Testar Chat IA como consultor geral
+
+# Histórico de Chat Persistente e IA Generativa
+
+- [x] Criar tabela de histórico de chat no banco de dados
+- [x] Implementar API para salvar e recuperar mensagens
+- [x] Ampliar prompt da IA para ser mais generativa com insights
+- [x] Adicionar sugestões de tópicos relacionados na UI
+- [x] Testar histórico persistente e interação generativa
