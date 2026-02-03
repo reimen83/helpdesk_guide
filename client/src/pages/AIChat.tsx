@@ -22,7 +22,7 @@ export default function AIChat() {
     {
       id: "1",
       role: "assistant",
-      content: "Olá! Sou seu assistente de IA especializado em Help Desk. Posso responder perguntas sobre atendimento ao cliente, gestão de SLA, troubleshooting de hardware e muito mais. Como posso ajudá-lo?",
+      content: "Olá! Sou seu assistente de IA. Posso ajudá-lo com qualquer assunto - desde tecnologia, negócios, educação, criatividade, e muito mais. Faça suas perguntas e vou fazer o meu melhor para ajudar. Como posso começar?",
       timestamp: new Date(),
     },
   ]);
@@ -74,7 +74,7 @@ export default function AIChat() {
     // Send to AI
     aiChatMutation.mutate({
       message: input,
-      context: "help_desk",
+      context: "general",
     });
   };
 
@@ -89,7 +89,7 @@ export default function AIChat() {
             <div>
               <h1 className="text-3xl font-bold">Assistente de IA</h1>
               <p className="text-gray-600 dark:text-gray-400">
-                Faça perguntas sobre Help Desk, SLA, troubleshooting e mais
+                Seu consultor de IA para qualquer assunto
               </p>
             </div>
           </div>
@@ -184,10 +184,10 @@ export default function AIChat() {
               <CardTitle className="text-lg">Exemplos de Perguntas</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
-              <p>• O que é Help Desk?</p>
-              <p>• Como gerenciar SLA?</p>
-              <p>• Dicas de troubleshooting</p>
-              <p>• Boas práticas de atendimento</p>
+              <p>• Como aprender programação?</p>
+              <p>• Qual é a melhor estratégia de marketing?</p>
+              <p>• Como melhorar minha produtividade?</p>
+              <p>• Explique um conceito de física</p>
             </CardContent>
           </Card>
 
@@ -197,8 +197,8 @@ export default function AIChat() {
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               <p>• Respostas instantâneas</p>
-              <p>• Baseado em IA generativa</p>
-              <p>• Contexto de Help Desk</p>
+              <p>• Baseado em IA generativa avançada</p>
+              <p>• Suporta qualquer assunto</p>
               <p>• Disponível 24/7</p>
             </CardContent>
           </Card>
@@ -211,7 +211,7 @@ export default function AIChat() {
               <p>• Seja específico em suas perguntas</p>
               <p>• Use linguagem clara</p>
               <p>• Faça perguntas de acompanhamento</p>
-              <p>• Combine com nossos cursos</p>
+              <p>• Explore diferentes tópicos livremente</p>
             </CardContent>
           </Card>
         </div>

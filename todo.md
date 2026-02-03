@@ -70,3 +70,8 @@
 
 - [x] Debugar e corrigir seletor de idiomas
 - [x] Testar mudança de idioma em todas as páginas
+
+# Desbloqueio do Chat IA
+
+- [x] Remover restrições de conteúdo do Chat IA
+- [x] Testar Chat IA como consultor geral
